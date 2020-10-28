@@ -2,6 +2,7 @@
   <div id="app">
     <!-- 导航栏 做成组件 -->
     <nav-bar></nav-bar>
+    
     <router-view/>
   </div>
 </template>

@@ -1,23 +1,18 @@
 <template>
-  <div id="home">
-    <h1>首页</h1>
-  </div>
+<div id="app">
+  <h1>应用</h1>
+</div>
 </template>
 
 <script>
 export default {
 
-  name: 'Home',
-  mounted() {
+  name: 'App',
 
-  },
   data () {
     return {
 
     }
-  },
-  methods: {
-    
   }
 }
 </script>

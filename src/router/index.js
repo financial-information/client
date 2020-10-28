@@ -42,6 +42,29 @@ const Profile = () => import('@/views/profile/Profile')
 */
 const Comment = () => import('@/views/comment/Comment')
 
+
+
+/*
+  comment
+*/
+const About = () => import('@/views/about/About')
+
+
+
+/*
+  comment
+*/
+const News = () => import('@/views/news/News')
+
+
+
+/*
+  comment
+*/
+const App = () => import('@/views/app/App')
+
+
+
 Vue.use(Router)
 const routes =  [
     // 默认路径
@@ -77,6 +100,22 @@ const routes =  [
       path: '/profile',
       component: Profile
     },
+    {
+      path: '/about',
+      component: About
+    },
+    {
+      path: '/news',
+      component: News
+    },
+    {
+      path: '/app',
+      component: App
+    },
+    {
+      path: '/comment',
+      component: Comment
+    }
   ]
 export default new Router({
   mode: 'history',

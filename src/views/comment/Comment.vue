@@ -1,6 +1,6 @@
 <template>
   <div id="comment">
-    commentcommentcomment
+    <h1>论坛</h1>
   </div>
 </template>
 

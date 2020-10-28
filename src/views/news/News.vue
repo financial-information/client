@@ -1,23 +1,18 @@
 <template>
-  <div id="home">
-    <h1>首页</h1>
-  </div>
+<div id="new">
+  <h1>新闻</h1>
+</div>
 </template>
 
 <script>
 export default {
 
-  name: 'Home',
-  mounted() {
+  name: 'News',
 
-  },
   data () {
     return {
 
     }
-  },
-  methods: {
-    
   }
 }
 </script>
