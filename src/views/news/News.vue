@@ -1,13 +1,13 @@
 <template>
-  <div id="comment">
-    <h1>论坛</h1>
-  </div>
+<div id="new">
+  <h1>新闻</h1>
+</div>
 </template>
 
 <script>
 export default {
 
-  name: 'Comment',
+  name: 'News',
 
   data () {
     return {
