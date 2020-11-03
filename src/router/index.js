@@ -45,23 +45,32 @@ const Comment = () => import('@/views/comment/Comment')
 
 
 /*
-  comment
+  About
 */
 const About = () => import('@/views/about/About')
 
 
 
 /*
-  comment
+  News
 */
 const News = () => import('@/views/news/News')
 
 
 
 /*
-  comment
+  App
 */
 const App = () => import('@/views/app/App')
+
+
+
+
+
+/*
+  Manage
+*/
+const Manage = () => import('@/views/manage/Manage')
 
 
 
@@ -115,6 +124,10 @@ const routes =  [
     {
       path: '/comment',
       component: Comment
+    },
+    {
+      path: '/manage',
+      component: Manage
     }
   ]
 export default new Router({

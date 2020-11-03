@@ -1,7 +1,11 @@
 import { request } from './request'
 
-export function getTestData() {
+
+
+
+
+export function getUserList(config) {
   return request({
-    url: 'aaa'
+    url: 'database/user_list/'
   })  
 }
