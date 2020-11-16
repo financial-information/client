@@ -1,7 +1,8 @@
 import { request } from './request'
 
+
 export function getTestData() {
   return request({
-    url: 'aaa'
+    url: '/seven_star_company_finance_data'
   })  
 }
