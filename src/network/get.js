@@ -1,8 +1,8 @@
 import { request } from './request'
 
 
-export function getTestData() {
+export function getUserList(config) {
   return request({
-    url: '/seven_star_company_finance_data'
+    url: 'database/user_list/'
   })  
 }

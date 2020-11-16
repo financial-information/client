@@ -10,6 +10,10 @@
   
   <template>
   <div id="home">
+<<<<<<< HEAD
+=======
+    <h1>首页</h1>
+>>>>>>> e972e36dfe84a288377dbec59a6b1dd1d1c8c81b
     <!-- homehomehome -->
     <!-- <div id="myChart" :style="{width: '300px', height: '300px'}"> -->
       <!-- <el-button type="primary">123</el-button> -->
@@ -160,9 +164,13 @@ export default {
   <el-main>Main</el-main>
 </el-container>
    </div>
+<<<<<<< HEAD
 =======
     <h1>首页</h1>
 >>>>>>> 47db4bfb35ed5201380c939d984a3aefda3db9b1
+=======
+>>>>>>> b5017393d0fac782b28d3c7dd1c5340a2f9689fd
+>>>>>>> e972e36dfe84a288377dbec59a6b1dd1d1c8c81b
   </div>
   
 

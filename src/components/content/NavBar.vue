@@ -17,7 +17,11 @@
         <span v-for="(item, index) in data" class="center_text" :class="{center_text_border: index !== 0}" @click="changePage(item)">
           {{item.text}}
         </span>
-        <i class="el-icon-s-grid"></i>
+        <i class="el-icon-s-grid"> </i>
+         
+        <el-button class="manage" @click="manage_page()">
+          管理后台
+        </el-button>
       </div>
       
       <div slot="right" class="right" @click="login">
@@ -27,6 +31,9 @@
         </div>
       </div>
     </nav-template>
+
+
+
 
     <!-- 模态框 -->
     <el-dialog
@@ -146,6 +153,10 @@ export default {
         this.registerPage = false
         this.modelTitle = "登录"
       }
+    },
+    // 跳转到管理后台
+    manage_page() {
+      this.$router.push('/manage')
     }
   }
 }
@@ -303,5 +314,8 @@ export default {
 }
 .repeat_password {
   margin-top: 15px;
+}
+.manage:hover {
+  color: white;
 }
 </style>
