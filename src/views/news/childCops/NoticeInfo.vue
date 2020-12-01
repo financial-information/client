@@ -6,7 +6,7 @@
 		<el-row>
 			您总共收到{{}}条信息
 		</el-row>
-		<el-row v-for="n in 3" style="margin-bottom: 20px;">
+		<el-row v-for="(n, index) in 3" :key="index" style="margin-bottom: 20px;">
     			<div class="noticeCards" id="noticeCards" >
 						<el-container style="width:100%;">
 							<el-aside style="width: 20%"><img :src= "objectresult[n-1].url" style="width: 115px;height: 118px; background-size: cover;margin-left: 20px;"></el-aside>

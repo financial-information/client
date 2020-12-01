@@ -18,8 +18,8 @@
     			</el-col>
     		</el-row>
 
-			<el-row v-for="n in 2" :gutter="80" style="margin-bottom: 20px;">
-    			<el-col :span="12" v-for="j in 2">
+			<el-row v-for="(n, index) in 2" :key="index" :gutter="80" style="margin-bottom: 20px;">
+    			<el-col :span="12" v-for="(j, index) in 2" :key="index">
     				<div class="profileCards" id="profileCards" >
 						<div style="margin-bottom: 15px;">
 							<el-container style="width:100%;height:95px;">

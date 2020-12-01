@@ -6,7 +6,7 @@
 	    <el-row class="profile_result_head"  >企明星为您找到<span style="color: red;">5</span>家符合条件的企业</el-row>
 	    
     	<div class="profile_result_detailed">
-    		<el-row v-for="n in 3" style="margin-bottom: 20px;">
+    		<el-row v-for="(n, index) in 3" :key="index" style="margin-bottom: 20px;">
     			<div class="profileResultCards" id="profileResultCards" >
 					<div style="
 					margin-bottom: 15px;">
