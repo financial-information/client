@@ -10,10 +10,6 @@
   
   <template>
   <div id="home">
-<<<<<<< HEAD
-=======
-    <h1>首页</h1>
->>>>>>> e972e36dfe84a288377dbec59a6b1dd1d1c8c81b
     <!-- homehomehome -->
     <!-- <div id="myChart" :style="{width: '300px', height: '300px'}"> -->
       <!-- <el-button type="primary">123</el-button> -->

@@ -1,58 +1,24 @@
 <template>
   <div id="manage">
-    用户表
-    <el-table
-    :data="tableData"
-    border
-    style="width: 100%">
-    <el-table-column
-      prop="user_code"
-      label="注册代码"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="phone"
-      label="手机号"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="password"
-      label="密码">
-    </el-table-column>
-    <el-table-column
-      prop="user_name"
-      label="用户名称">
-    </el-table-column>
-    <el-table-column
-      prop="gender"
-      label="性别">
-    </el-table-column>
-    <el-table-column
-      prop="email"
-      label="邮箱">
-    </el-table-column>
-    <el-table-column
-      prop="is_deleted"
-      label="注销">
-    </el-table-column>
-    <el-table-column
-      prop="is_deleted"
-      label="操作">
-      <template slot-scope="scope">
-        <el-row>
-          <el-col :span="12">
-            <el-button size="mini" type="warning">编辑</el-button>
-          </el-col>
 
-          <el-col :span="12">
-            <el-button size="mini" type="danger">删除</el-button>
-          </el-col>
-        </el-row>
-        
-        
-      </template>
-    </el-table-column>
-  </el-table>
+    <el-container class="container">
+  <el-aside class="aside" width="200px">
+    <el-menu :default-openeds="['1']">
+          <el-menu-item>企业基本信息表</el-menu-item>
+          <el-menu-item>企业财务报表</el-menu-item>
+          <el-menu-item>企业风险分析表</el-menu-item>
+    </el-menu>
+  </el-aside>
+  
+  <el-container>
+    <el-main class="main">
+    <!-- 企业基本信息表 -->
+    <company-information-table></company-information-table>
+
+
+    </el-main>
+  </el-container>
+</el-container>
 
 
 
@@ -60,68 +26,27 @@
 </template>
 
 <script>
-import { getUserList } from '@/network/get'
+
+
+
+import CompanyInformationTable from "./childCops/CompanyInformationTable"
+
 export default {
 
   name: 'Manage',
+  components: {
+    CompanyInformationTable,
+  },
   data () {
-    return {
-      tableData: [
-        {
-          id: '000001',
-          phone: '19955886633',
-          password: '123456',
-          name: '龙龙',
-          gender: 1,
-          email: '123456@qq.com',
-          is_delete: 1,
-        }, 
-        {
-          id: '000001',
-          phone: '19955886633',
-          password: '123456',
-          name: '龙龙',
-          gender: 1,
-          email: '123456@qq.com',
-          is_delete: 1,
-        }, 
-        {
-          id: '000001',
-          phone: '19955886633',
-          password: '123456',
-          name: '龙龙',
-          gender: 1,
-          email: '123456@qq.com',
-          is_delete: 1,
-        }, 
-        {
-          id: '000001',
-          phone: '19955886633',
-          password: '123456',
-          name: '龙龙',
-          gender: 1,
-          email: '123456@qq.com',
-          is_delete: 1,
-        }, 
-        ]
-    }
+      return {
+        tableData: []
+      }
     },
     mounted() {
-      this.getUserList()
+      
     },
     methods: {
-      getUserList() {
-        getUserList().then(res => {
-          for (let i = 0; i < res.data.length; i++) {
-            if(res.data[i].gender == 1) {
-              res.data[i].gender = "女"
-            } else {
-              res.data[i].gender = "男"
-            }
-          }
-        this.tableData = res.data
-        })
-      }
+      
     }
 
 }
@@ -133,4 +58,16 @@ export default {
   margin: 10px 10%;
   padding: 10px 20px;
 }
+.main {
+  height: 100%;
+}
+.aside {
+  /*width:100px;*/
+  /*margin-right: 20px;*/
+  background-color: rgb(238, 241, 246);
+}
+.container {
+  height: 800px; border: 1px solid #eee
+}
+
 </style>

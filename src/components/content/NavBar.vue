@@ -37,12 +37,13 @@
 
     <!-- 模态框 -->
     <el-dialog
-      :title="modelTitle"
       :visible.sync="centerDialogVisible"
       width="50%"
       class="model"
       center>
       <!-- 登录注册输入框 -->
+      <h1 class="title" v-show="!registerPage">登 录</h1>
+      <h1 class="title" v-show="registerPage">注 册</h1>
       <div class="input_area" v-show="!registerPage">
         <el-input class="input" placeholder="电话" v-model="account" clearable></el-input>
         <div class="text_area">
@@ -65,14 +66,17 @@
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
         <div class="register_link">
-          <el-link class="register_account" type="info" v-show="!registerPage">还没有用户？</el-link>
+          <el-link class="register_account" type="info" v-show="!registerPage" disabled>还没有用户？</el-link>
           <el-link target="_blank" @click="changeModel()" v-show="!registerPage">立马注册</el-link>
-          <el-link class="register_account" type="info" v-show="registerPage">已有用户？</el-link>
+          <el-link class="register_account" type="info" v-show="registerPage" disabled>已有用户？</el-link>
           <el-link target="_blank" @click="changeModel()" v-show="registerPage">立马登录</el-link>
         </div>
-        <div class="show_img">
+        <div class="bottom">
           
         </div>
+        <!-- <div class="show_img">
+          
+        </div> -->
       </span>
     </el-dialog>
 
@@ -165,14 +169,16 @@ export default {
 <style lang="css" scoped>
 /*登录模态框中的登陆按钮*/
 >>> .el-button--primary {
-  background-color: rgb(102, 102, 102);
+  /*background-color: rgb(102, 102, 102);*/
+  transition: all 0.5s;
+  background-color: rgb(73, 77, 194, 0.9);
 }
 >>> .el-button {
   border-radius: 20px;
   width: 120px;
 }
 >>> .el-button:hover {
-  background-color: rgb(73, 77, 194);
+  background-color: rgb(73, 77, 194, 1);
 }
 >>> .el-dialog__title {
   font-size: 28px;
@@ -182,9 +188,11 @@ export default {
   font-size: 26px;
 }
 >>> .el-dialog {
-  border-radius: 20px;
-  background-image: url("~@/assets/img/common/mountain.png");
+  border-radius: 30px;
+  background-image: url("~@/assets/img/common/login_background.png");
+  background-size:800px 300px;
   background-repeat: no-repeat;
+  min-width: 800px;
 }
 /*输入框*/
 >>> .el-input__inner {
@@ -317,5 +325,14 @@ export default {
 }
 .manage:hover {
   color: white;
+}
+.title {
+  text-align:center;
+  font-size: 50px;
+  color:black;
+  margin-top:0;
+}
+.bottom {
+  height: 40px;
 }
 </style>

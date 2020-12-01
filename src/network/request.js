@@ -30,16 +30,39 @@ export function requestPost(config) {
   })
 
 
-  instance.interceptor.request.use(config => {
+  instance.interceptors.request.use(config => {
     return config
   }, err => {
     console.log(err)
   })
 
-  instance.interceptor.response.use(res => {
+  instance.interceptors.response.use(res => {
     return res.data
   }, err => {
     console.log(err)
   })
   return instance.post(config.url, config.params)
+}
+
+
+export function requestPut(config) {
+  const instance = axios.create({
+    baseURL: url,
+    timeout: 5000,
+  })
+
+
+  instance.interceptors.request.use(config => {
+    return config
+  }, err => {
+    console.log(err)
+  })
+
+  instance.interceptors.response.use(res => {
+    return res.data
+  }, err => {
+    console.log(err)
+  })
+  
+  return instance.put(config.url, config.params)
 }
