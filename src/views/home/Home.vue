@@ -10,10 +10,6 @@
   
   <template>
   <div id="home">
-<<<<<<< HEAD
-=======
-    <h1>首页</h1>
->>>>>>> e972e36dfe84a288377dbec59a6b1dd1d1c8c81b
     <!-- homehomehome -->
     <!-- <div id="myChart" :style="{width: '300px', height: '300px'}"> -->
       <!-- <el-button type="primary">123</el-button> -->
@@ -51,7 +47,7 @@
 <information></information>
 
 <hr>
-<footers></footers>
+<footers></footers> 
   </div>
 </template>
 
@@ -60,7 +56,7 @@
   import New  from "./childCops/New.vue"
   import Userbar  from "./childCops/UserBar.vue"
   import  Information from "./childCops/Information.vue"
-  import Footers from "./childCops/Footer.vue"
+   import Footers from "./childCops/Footer.vue"
 export default {
   name: 'Home',
   components:{
@@ -68,7 +64,7 @@ export default {
     New,
     Userbar,
     Information,
-    Footers
+     Footers
   },
    mounted() {
   // import {getTestData} from '@/network/get'
@@ -109,6 +105,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
+#home{
+  background-color: #FDFDFD;
+}
 </style> 
 
 

@@ -93,7 +93,11 @@
   </el-aside>
   <el-main  style="width:50%;padding: 0px;">
      <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="市场总览" name="first">市场总览</el-tab-pane>
+    <el-tab-pane label="市场总览" name="first">
+      <div>
+        <p>截止到：</p>
+      </div>
+    </el-tab-pane>
     <el-tab-pane label="中小企业版" name="second">中小企业版</el-tab-pane>
     <el-tab-pane label="创业板" name="third">创业板</el-tab-pane>
   </el-tabs>

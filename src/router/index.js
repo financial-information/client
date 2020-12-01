@@ -72,7 +72,10 @@ const App = () => import('@/views/app/App')
 */
 const Manage = () => import('@/views/manage/Manage')
 
-
+/*
+  searchresult
+*/
+const Searchresult = () => import('@/views/profile/childCops/SearchResult')
 
 Vue.use(Router)
 const routes =  [
@@ -99,15 +102,21 @@ const routes =  [
     },
     {
       path: '/stock',
+      name:'stock',
       component: Stock
     },
+    
     {
       path: '/search',
       component: Search
     },
     {
       path: '/profile',
-      component: Profile
+      component: Profile,
+      meta: {        
+        isUseCache: false,  // 这个字段的意思稍后再说      
+        keepAlive: true  // 通过此字段判断是否需要缓存当前组件  
+    }  
     },
     {
       path: '/about',
@@ -128,6 +137,10 @@ const routes =  [
     {
       path: '/manage',
       component: Manage
+    },
+    {
+      path: '/searchresult',
+      component: Searchresult
     }
   ]
 export default new Router({
