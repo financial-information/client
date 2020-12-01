@@ -47,7 +47,7 @@
       <div class="input_area" v-show="!registerPage">
         <el-input class="input" placeholder="电话" v-model="account" clearable></el-input>
         <div class="text_area">
-            <el-link>忘记密码？</el-link>
+            <el-link >忘记密码？</el-link>
         </div>
         <el-input class="input" placeholder="密码" v-model="password" show-password></el-input>
       </div>

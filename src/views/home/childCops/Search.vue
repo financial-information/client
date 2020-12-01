@@ -6,18 +6,18 @@
            <div class="search-input">
                <div class="search-input-text" ><span>启明星，一搜就明白</span></div>
                <el-input placeholder="查一查" class="input-with-select "  prefix-icon="el-icon-search"id="TabSearch" v-model="SearchInput">
-                   <el-button   slot="append"   id="TabSearch"  class="input-with-search "  style="border:none;outline: none;">查一查</el-button>
+                   <el-button   slot="append"   id="TabSearch"  class="input-with-search "  @click="goSearchPage()">查一查</el-button>
                </el-input>
                <div class="search2" style="">
                     <el-row>
                            <el-col :offset="1"  :span="3" align="center">
-                              <div class="grid-content bg-purple"  v-bind:class="classObject1" style="border-radius: 5px 5px  10px 10px;padding: 2px;"><!-- <img src="@/assets/查.jpg" alt="企明星" style="width:35%;"> -->
-                                    <label class="search2-item" for="TabSearch" @click="change1" ><img src="@/assets/img/home/股票.png" style="width: 20px;">查股票</label>
+                              <div class="grid-content bg-purple"  @click="searchShares=true" v-bind:class="[activeAffter ,searchShares===true ? activeBefore : '']"><!-- <img src="@/assets/查.jpg" alt="企明星" style="width:35%;"> -->
+                                    <label class="search2-item" for="TabSearch"  ><img src="@/assets/img/home/股票.png" style="width: 20px;">查股票</label>
                               </div>
                             </el-col> 
                            <el-col :span="3">
-                               <div class="grid-content bg-purple-light" width="35px"  v-bind:class="classObject2" style="border-radius: 5px 5px  10px 10px;padding: 2px;"><!-- <img src="@/assets/查.jpg" alt="企明星" width="35%"> -->
-                                      <label class="search2-item" for="TabSearch" @click="change2" ><img src="@/assets/img/home/股票.png" style="width: 20px;">查年报</label>
+                               <div class="grid-content bg-purple-light" width="35px"  @click="searchShares=false" v-bind:class="[activeAffter,searchShares===false ?  activeBefore : '']"><!-- <img src="@/assets/查.jpg" alt="企明星" width="35%"> -->
+                                      <label class="search2-item" for="TabSearch" ><img src="@/assets/img/home/股票.png" style="width: 20px;">查年报</label>
                               </div>
                             </el-col> 
                      </el-row>
@@ -25,6 +25,7 @@
            </div>
          </div>
        </div>
+     </router-view>
 </template>
 
 <script>
@@ -35,46 +36,30 @@ export default {
   data () {
     return {
     	searchShares: true,
-      searchReport: false,
-      SearchInput: ''
+      SearchInput: '',
+      activeBefore: 'active2',
+      activeAffter: 'active1'
 
     }
   }, 
   computed:{
-     classObject1:function(){
-      return{
-             active1: this.searchShares && !this.searchReport,
-             active2: this.searchReport && !this.searchShares
-      }
-      },     
-     classObject2:function(){
-      return{
-             active1: !this.searchShares && this.searchReport,
-              active2: !this.searchReport && this.searchShares
-        
-      }
-      }
   },
   methods: {
-    change1(){
-      this.searchShares = true,
-      this.searchReport = false
-    },
-    change2(){
-      this.searchShares = false,
-      this.searchReport = true
+    goSearchPage(){
+      if (this.SearchInput ==="")
+          this.$message('请输入内容进行查询');
+      else if ( this.searchShares === true)
+         this.$router.push({path:"/stock",query:{ Shares: this.SearchInput}})
+      else
+         this.$router.push({path:"/profile",query:{ Reports: this.SearchInput}})
     }
 }
 }
 </script>
 
 <style lang="css" scoped>
-
-
-
-
 .search{
-  background-image: url("~@/assets/img/home/search_background.jpg");
+  background-image: url("~@/assets/img/home/search_background.png");
   background-repeat: no-repeat;
   background-size:cover;
 }
@@ -100,18 +85,26 @@ export default {
    border-radius: 20px 0px 0px 20px;
   
 }
+.search-input  /deep/ .el-input-group__append {
+   border: 0;
+     background-color: #494DC2;
+    border-radius: 0px 20px 20px 0px;
+}
 .search-input  /deep/  .el-button{
-  
+  bottom: 0;
    border:none;
-   
    outline: none;
-   border-radius: 20px;background-color: purple;
+  
+  
 }
 .active1{
-  background-color: white;
+  background-color: #494DC2;
+  color: white;
+  border-radius: 0px 0px  10px 10px;padding: 2px;
 }
 .active2{
-  background-color: purple;
-  color: white;
+  background-color: white;
+  color: black;
+  border-radius: 0px 0px  10px 10px;padding: 2px;
 }
 </style>

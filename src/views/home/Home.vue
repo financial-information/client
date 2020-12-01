@@ -47,7 +47,7 @@
 <information></information>
 
 <hr>
-<footers></footers>
+<footers></footers> 
   </div>
 </template>
 
@@ -56,7 +56,7 @@
   import New  from "./childCops/New.vue"
   import Userbar  from "./childCops/UserBar.vue"
   import  Information from "./childCops/Information.vue"
-  import Footers from "./childCops/Footer.vue"
+   import Footers from "./childCops/Footer.vue"
 export default {
   name: 'Home',
   components:{
@@ -64,7 +64,7 @@ export default {
     New,
     Userbar,
     Information,
-    Footers
+     Footers
   },
    mounted() {
   // import {getTestData} from '@/network/get'
@@ -105,6 +105,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
+#home{
+  background-color: #FDFDFD;
+}
 </style> 
 
 

@@ -12,8 +12,8 @@
   </el-aside>
   <el-main  style="width:45%;padding: 0px; box-shadow: 5px 5px 5px #888888;">
       <el-row style="background-color: #414498;padding: 5px;">
-          <el-col :span="12"><div class="grid-content bg-purple"style="font-size: 20px;text-align: center;"><i class="el-icon-bell"></i>时事热点</div></el-col>
-          <el-col :span="12"><a href="" style=""><div class="grid-content bg-purple" style="margin-top: 8px;font-size: 12px;line-height: 25%;float: right;">更多讯息<i class="el-icon-arrow-right"></i></div></a></el-col>
+          <el-col :span="12"><div class="grid-content bg-purple"style="font-size: 20px;text-align: center;color: white;"><i class="el-icon-bell"></i>时事热点</div></el-col>
+          <el-col :span="12"><a href="" style=""><div class="grid-content bg-purple" style="margin-top: 8px;font-size: 12px;line-height: 25%;float: right;color: white;">更多讯息<i class="el-icon-arrow-right"></i></div></a></el-col>
       </el-row>
       <el-row style="padding: 5px;border-bottom: 1px solid gray;"><div style=""><a href="https://finance.sina.com.cn/china/2020-11-15/doc-iiznezxs1995562.shtml" style="text-decoration: none;color: black;">习近平：坚定不移贯彻新发展理念 推动长江经济带高质量发展</a> </div></el-row>
       <el-row style="padding: 5px;border-bottom: 1px solid gray;"><div><a href="https://finance.sina.com.cn/china/2020-11-15/doc-iiznctke1529420.shtml"  style="text-decoration: none;color: black;">李克强：RCEP的签署是多边主义和自由贸易的胜利</a> </div></el-row>
