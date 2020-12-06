@@ -30,3 +30,11 @@ export function addCompanyBasicData(data) {
     params: qs.stringify(data)
   })
 }
+
+// 登录
+export function login(data) {
+  return requestPost({
+    url: '/users/login/',
+    params: qs.stringify(data)
+  })
+}

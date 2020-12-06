@@ -3,6 +3,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import VueLazyLoad from 'vue-lazyload'
+import VueCookies from 'vue-cookies'
 
 // 图表
 import echarts from 'echarts'
@@ -16,7 +17,8 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 Vue.use(ElementUI)
-
+// 使用cookie
+Vue.use(VueCookies)
 
 new Vue({
   el: '#app',

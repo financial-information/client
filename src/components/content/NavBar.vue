@@ -4,7 +4,7 @@
       <div slot="left" class="left">
         <el-row>
           <el-col :span="1" class="logo">
-            <img src="@/assets/img/common/logo.png" class="img" alt="">
+            <img src="~@/assets/img/common/logo.png" class="img" alt="">
           </el-col>
           <el-col :span="12" class="left_text">
           &nbsp;企明星
@@ -19,15 +19,38 @@
         </span>
         <i class="el-icon-s-grid"> </i>
          
-        <el-button class="manage" @click="manage_page()">
+        <!-- <el-button class="manage" @click="manage_page()">
           管理后台
-        </el-button>
+        </el-button> -->
       </div>
       
-      <div slot="right" class="right" @click="login">
-        <div class="button">
+      <div slot="right" class="right" v-if="!logined">
+        <div class="button" @click="centerDialogVisible = true">
           <span>登录</span> | 
           <span>注册</span>
+        </div>
+      </div>
+      <div slot="right" class="right" v-if="logined">
+        <input
+        placeholder="搜索"
+        class="search_info">
+          
+        </input>
+        <button class="search_btn"><i class="el-icon-search"></i></button>
+        <div class="user_img">
+          <el-image
+          class="user_image"
+          :src="userImg">
+            
+          </el-image>
+        </div>
+
+        <div class="user_img">
+          <el-image
+          class="user_image"
+          :src="userImg">
+            
+          </el-image>
         </div>
       </div>
     </nav-template>
@@ -40,14 +63,49 @@
       :visible.sync="centerDialogVisible"
       width="50%"
       class="model"
+      :close-on-click-modal='false'
       center>
+      <!-- 忘记密码输入框 -->
+      <div class="forget_password input_area" v-show="forgetPassword">
+        <h1 class="title forget_title">找回密码</h1>
+        <p class="forget_notify">验证码会发至你的邮箱</p>
+        
+        <div v-show="!registerPage">
+          <el-input class="input" placeholder="请输入你的邮箱" v-model="email" clearable></el-input>
+          <div class="text_area">
+          </div>
+          <el-input class="input" placeholder="请输入验证码" v-model="checkCode" ></el-input>
+          <!-- 验证码图片 -->
+          <div class="check_img">
+            <el-image 
+              style="width: 100%; height: 100%"
+              :src="checkCodeImg">
+            </el-image>
+          </div>
+        </div>
+        <!-- 登录注册确定按钮以及提示 -->
+      <span slot="footer" class="dialog-footer">
+        <el-button class="confirm" type="primary" @click="next">确 定</el-button>
+        <div class="bottom">
+          
+        </div>
+        <!-- <div class="show_img">
+          
+        </div> -->
+      </span>
+
+
+      </div>
+
+
       <!-- 登录注册输入框 -->
+      <div class="input_area" v-show="!forgetPassword">
       <h1 class="title" v-show="!registerPage">登 录</h1>
       <h1 class="title" v-show="registerPage">注 册</h1>
-      <div class="input_area" v-show="!registerPage">
+      <div v-show="!registerPage">
         <el-input class="input" placeholder="电话" v-model="account" clearable></el-input>
         <div class="text_area">
-            <el-link >忘记密码？</el-link>
+            <el-link @click="forgetPassword = true">忘记密码？</el-link>
         </div>
         <el-input class="input" placeholder="密码" v-model="password" show-password></el-input>
       </div>
@@ -57,14 +115,14 @@
           <el-input class="input_register_message register_name" placeholder="名称" v-model="name" clearable></el-input>
           <el-input class="input_register_message register_phone" placeholder="电话" v-model="phone" clearable></el-input>
         </div>
-        <el-input class="input_register" placeholder="密码" v-model="account" show-password></el-input>
+        <el-input class="input_register" placeholder="密码" v-model="password" show-password></el-input>
         <el-input class="input_register repeat_password" placeholder="重复密码" v-model="repeatPassword" show-password></el-input>
       </div>
       
 
       <!-- 登录注册确定按钮以及提示 -->
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+        <el-button class="confirm" type="primary" @click="next">确 定</el-button>
         <div class="register_link">
           <el-link class="register_account" type="info" v-show="!registerPage" disabled>还没有用户？</el-link>
           <el-link target="_blank" @click="changeModel()" v-show="!registerPage">立马注册</el-link>
@@ -78,6 +136,8 @@
           
         </div> -->
       </span>
+        
+      </div>
     </el-dialog>
 
 
@@ -86,11 +146,14 @@
 
 <script>
 import NavTemplate from "@/components/common/NavTemplate"
+
+import { login } from "@/network/yz"
+
 export default {
 
   name: 'NavBar',
   components: {
-    NavTemplate
+    NavTemplate,
   },
   props: {
     data: {
@@ -129,14 +192,22 @@ export default {
         right: 4
       },
       centerDialogVisible: false,
-      account: new String,
-      password: new String,
-      phone: new String,
-      name: new String,
-      repeatPassword: new String,
+      account: "",
+      password: "",
+      phone: "",
+      name: "",
+      repeatPassword: "",
       // 登陆注册转换参数
       modelTitle: "登录",
-      registerPage: false
+      registerPage: false,
+      forgetPassword: false,
+      // 忘记密码参数
+      email: "",
+      checkCode: "",
+      // 验证码
+      checkCodeImg: "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
+      userImg: "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
+      logined: false
     }
   },
   methods: {
@@ -146,8 +217,63 @@ export default {
       this.$router.push(item.path)
     },
     login() {
-      console.log(123)
-      this.centerDialogVisible = true
+      if(this.account == "" || this.password == "") {
+        this.$message.error("账号或密码不能为空")
+      } else {
+        let data = {
+          "username": this.account,
+          "password": this.password
+        }
+        login(data).then(res => {
+          console.log(res)
+          // 登录成功
+          if(res.status == true) {
+            let data = res.session
+            this.$notify({
+              title: "成功",
+              message: "登陆成功",
+              type: "success"
+            })
+            this.$store.commit("updateSession", data)
+            // this.$cookie.set("sessionid", this.$store.getters.getSession, {expires:1})
+            // console.log("this.$cookie =")
+            // console.log(this.$cookie)
+            // console.log("cookie=")
+            // console.log(document.cookie)
+            this.centerDialogVisible = false
+            this.logined = true
+          } else {
+            this.$message.error("登录失败，账号或密码错误")
+          }
+        }).catch(err => {
+          this.$notify({
+              title: "失败",
+              message: "请求超时",
+              type: "danger"
+            })
+        })
+      }
+    },
+    register() {
+      if(this.name == "" || this.phone == "") {
+        this.$message.error("名称或电话不能为空")
+      } else if(this.password == "" || this.repeatPassword == "") {
+        this.$message.error("密码不能为空")
+      } else {
+        if(this.password != this.repeatPassword) {
+          this.$message.error("重复密码不一样")
+        } else {
+          this.$message.success("注册成功")
+        }
+      }
+    },
+    next() {
+      if(!this.registerPage) {
+        this.login()
+      } else {
+        this.register()
+      }
+      // this.centerDialogVisible = false
     },
     changeModel() {
       if(this.registerPage == false) {
@@ -188,9 +314,9 @@ export default {
   font-size: 26px;
 }
 >>> .el-dialog {
-  border-radius: 30px;
+  border-radius: 40px;
   background-image: url("~@/assets/img/common/login_background.png");
-  background-size:800px 300px;
+  background-size:1000px 300px;
   background-repeat: no-repeat;
   min-width: 800px;
 }
@@ -249,7 +375,7 @@ export default {
 .button {
   padding: 8px 20px;
   border-radius: 20px;
-  background-color: rgb(73, 77, 194, 1);
+  background-color: rgba(73, 77, 194, 1);
 }
 .button:hover {
   cursor: pointer;
@@ -334,5 +460,70 @@ export default {
 }
 .bottom {
   height: 40px;
+}
+.confirm {
+  margin-top:20px;
+}
+/*忘记密码*/
+.forget_title {
+  margin:0;
+  font-size: 35px;
+}
+.forget_notify {
+  margin-top:0;
+}
+.check_img {
+  width: 150px;
+  height: 75px;
+  /*text-align: center;*/
+  margin:auto;
+  margin-top:20px;
+}
+/*模态框关闭按钮*/
+>>> .el-icon-close {
+  color: black;
+  font-size:25px;
+  font-weight: bold;
+}
+.button {
+  float: right;
+}
+.user_img {
+  float: right;
+  width: 40px;
+}
+.user_image {
+  width: 40px; 
+  height: 40px;
+  border-radius: 50px;
+}
+
+.search_info {
+  height:28px;
+  width: 100px;
+  /*position: re*/
+  margin-top:6.5px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  padding: 0 10px;
+  border:1px solid #999;
+}
+.search_info:focus, .search_btn:focus{
+  outline: medium;
+}
+.search_btn {
+  height:30px;
+  width: 40px;
+  line-height: 5px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  transform: translate(-21%, 0);
+  background-color: rgba(73, 77, 194, 1);
+  border:none;
+  color:white;
+}
+.search_btn:hover {
+  cursor: pointer;
+  background-color: rgba(73, 77, 194, 0.8);
 }
 </style>

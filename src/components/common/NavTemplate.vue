@@ -35,9 +35,9 @@ export default {
       type: Object,
       default() {
         return {
-          left: 4,
-          center: 16,
-          right: 4 
+          left: 5,
+          center: 12,
+          right: 7 
         }
       }
     }

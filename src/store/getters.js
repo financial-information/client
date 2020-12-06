@@ -4,6 +4,12 @@ const getters = {
   },
   cartCount(state, getters) {
     return getters.cartList.length
+  },
+
+
+
+  getSession(state) {
+    return state.session
   }
 }
 
