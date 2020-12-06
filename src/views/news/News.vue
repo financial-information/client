@@ -1,11 +1,13 @@
 <template>
 <div id="new">
-    <el-tabs tab-position=left style="">
-    <el-tab-pane label="个人信息">
-    	<personinfo></personinfo>
+<welcomeinfo v-show="!changeshow"></welcomeinfo>
+	
+    <el-tabs tab-position=left >
+    <el-tab-pane label="个人信息" >
+    	<personinfo ></personinfo>
     </el-tab-pane>
-    <el-tab-pane label="修改信息">
-    	<changeinfo></changeinfo>
+    <el-tab-pane label="修改信息" >
+    	<changeinfo ></changeinfo>
     </el-tab-pane>
     <el-tab-pane label="消息通知">
     	<noticeinfo></noticeinfo>
@@ -14,8 +16,8 @@
 		<browseinfo></browseinfo>
 	</el-tab-pane>
     <el-tab-pane label="我的收藏">我的收藏</el-tab-pane>
-
   </el-tabs>
+  
 </div>
 </template>
 
@@ -24,6 +26,9 @@
 	import Changeinfo from "./childCops/ChangeInfo.vue"
 	import Noticeinfo from "./childCops/NoticeInfo.vue"
 	import Browseinfo from "./childCops/BrowseInfo.vue"
+	import Welcomeinfo from "./childCops/WelcomeInfo.vue"
+	import Welchangeinfo from "./childCops/WelchangeInfo.vue"
+
 export default {
 
   name: 'News',
@@ -31,13 +36,22 @@ export default {
 	    Personinfo,
 	    Changeinfo,
 	    Noticeinfo,
-	    Browseinfo
+	    Browseinfo,
+	    Welcomeinfo,
+	    Welchangeinfo
 	    
   },
   data () {
     return {
-
+       changeshow:false
     }
+  },
+  methods:{
+  	// getshow(data){
+       	
+   //      this.changeshow=data
+        
+   //     }
   }
 }
 </script>
@@ -48,6 +62,9 @@ export default {
 	margin-left: 10%;
 }
 #new >>>.el-tabs__header.is-left{
+
+  width: 150px;
+  margin-top: 20px;
    
 }
 </style>

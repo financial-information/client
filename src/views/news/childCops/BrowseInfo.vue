@@ -3,13 +3,13 @@
 		<el-row>
 			<el-button style="float: right;margin-bottom: 20px;">删除所有浏览记录</el-button>
 		</el-row>
-		<el-row v-for="(item, index) in objectresult" :key="index"  style="margin-bottom: 20px;" >
+		<el-row v-for="(item,index) in objectresult" :key="index" style="margin-bottom: 20px;" >
     			<div class="noticeCards" id="noticeCards" >
 						
 							<el-row class="date_head">今天2020-11-25 星期三</el-row>
 							
 							<div class="noticeCards_body">
-								<el-row v-for='(items, index) in item' :key="index" style="margin-bottom:8px;color: #A5A5A5;">
+								<el-row v-for='(items,index) in item' :key="index"style="margin-bottom:8px;color: #A5A5A5;">
 									<el-col :span="5" >
 										<div class="bg-purple">
 										{{items.stock_name}}</div>

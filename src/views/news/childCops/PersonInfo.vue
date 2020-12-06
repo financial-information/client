@@ -1,6 +1,6 @@
 <template>
-<div style="margin: 20px;">
-    <el-form label-position=top :rules="rules" ref="ruleForm" label-width="80px" :model="ruleform" class="demo-ruleform">
+<div class="person_body">
+    <el-form label-position=top status-icon :rules="rules" ref="ruleForm" label-width="80px" :model="ruleform" class="demo-ruleform">
       <el-form-item label="名称" :required=true >
         <el-input v-model="ruleform.name"></el-input>
     </el-form-item>
@@ -19,7 +19,7 @@
     <el-form-item label="自我介绍">
         <el-input type="textarea" v-model="ruleform.introduce"></el-input>
       </el-form-item>
-</el-form>
+   </el-form>
 </div>
 </template>
 <script>
@@ -47,9 +47,12 @@
 
 
 <style scoped>
+.person_body{
+  width: 90%;
+  margin-left: 5%;
+}
 .el-form /deep/ .el-form-item__label {
-    float: none;
-    display: inline-block;
+   
     text-align: left;
     font-size: 25px;
     font-weight: bold;
@@ -62,7 +65,7 @@ opacity: 1;
 border-radius: 14px;
 }
 .prompt{
-color: #7D7979;
+   color: #7D7979;
   border-bottom:2px solid #D3D3D3;
   margin-bottom: 20px;
 }

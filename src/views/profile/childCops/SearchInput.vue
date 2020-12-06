@@ -154,6 +154,8 @@
        value4:[]
 			}
 		},
+    created(){
+    },
   methods: {
     goResultPage(){
       
@@ -167,8 +169,8 @@
           this.$emit('searchvalue',{value0:this.value0,value1:this.value1,value2
           :this.value2,value3:this.value3,value4:this.value4})
 
-           // this.$router.push({path:"/profile",query:{ value0:this.value0,value1:this.value1,value2
-           // :this.value2,value3:this.value3,value4:this.value4}})
+            this.$router.push({path:"/prosearch",query:{ value0:this.value0,value1:this.value1,value2
+            :this.value2,value3:this.value3,value4:this.value4}})
         }
        },
        goProDetailed(data){

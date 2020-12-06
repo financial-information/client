@@ -115,32 +115,46 @@ color: #7D7979;
 </style> -->
 
 <template>
-<el-form  label-position=top :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="80px" class="demo-ruleForm" style="margin-left: 30px;margin-right: 80px; ">
+<div class="change_body">
 
-<el-form-item label="名称" :required=true>
-    <el-input v-model="ruleForm.name"></el-input>
-  </el-form-item>
+  <el-row>
+        <el-col :span="5">
+          <img  src="~@/assets/img/home/查.jpg" style="width: 80px;height: 80px; background-size: cover;margin-left: 20px;border-radius: 30%;">
+        </el-col>
+        <el-col :span="5"><el-button style="margin-top: 25px;">上传头像</el-button></el-col>
+        </el-row>
+      <el-form  label-position=top :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="80px" class="demo-ruleForm" >
 
-<el-form-item label="电话" prop="phone" :required=true>
-          <el-input v-model="ruleForm.phone"></el-input>
-</el-form-item>
+      <el-form-item label="名称" :required=true>
+          <el-input v-model="ruleForm.name"></el-input>
+        </el-form-item>
 
-  <el-form-item label="密码" prop="pass" :required=true>
-    <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
-  </el-form-item>
-  <el-form-item label="确认密码" prop="checkPass" :required=true>
-    <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
-  </el-form-item>
- 
-  <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm')">保存更改</el-button>
-  </el-form-item>
+      <el-form-item label="电话" prop="phone" :required=true>
+                <el-input v-model="ruleForm.phone"></el-input>
+      </el-form-item>
 
-</el-form>
+        <el-form-item label="密码" prop="pass" :required=true>
+          <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="确认密码" prop="checkPass" :required=true>
+          <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+        </el-form-item>
+       
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('ruleForm')">保存更改</el-button>
+        </el-form-item>
+
+      </el-form>
+</div>
 </template>
 <script>
+  import Welchangeinfo from "./WelchangeInfo.vue"
   export default {
-    name:'register',
+    name:'Changeinfo',
+  components:{
+      Welchangeinfo
+      
+  },
     data() {
       var validatePass = (rule, value, callback) => {
         if (value === '') {
@@ -194,7 +208,11 @@ color: #7D7979;
         }
       };
     },
+    mouted(){
+      // this.sentshow()
+    },
      methods: {
+
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -204,16 +222,24 @@ color: #7D7979;
             return false;
           }
         });
-      }
+      // },
+      // sentshow(){
+      //   this.$emit('showchange',this.show)
+      // }
+
     }
   }
+}
 </script>
 
 <style scoped>
+.change_body{
+  width: 90%;
+  margin-left: 5%;
+}
 
 .el-form /deep/ .el-form-item__label {
-    float: none;
-    display: inline-block;
+    
     text-align: left;
     font-size: 25px;
     font-weight: bold;

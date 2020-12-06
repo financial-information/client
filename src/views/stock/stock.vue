@@ -7,7 +7,7 @@
   		<div class="stock_box_router">
   			<el-row>
   				<i class="el-icon-location" @click="$router.back(-1)"></i>
-  				<span @click="$router.back(-1)">首页</span>
+  				<span @click="back()">返回</span>
   				<i class="el-icon-d-arrow-right"></i>
   				<span>{{stock}}</span>
   			</el-row>
@@ -257,6 +257,10 @@ export default {
       },
       handleClick(tab, event) {
         console.log(tab, event);
+      },
+      back(){
+        this.$router.push({path:"/prosearch",query:{value0:this.$route.query.value0,value1:this.$route.query.value1,value2
+            :this.$route.query.value2,value3:this.$route.query.value3,value4:this.$route.query.value4}})
       }
     }
 }

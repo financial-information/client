@@ -35,6 +35,10 @@ const Search = () => import('@/views/search/Search')
 */
 const Profile = () => import('@/views/profile/Profile')
 
+/*
+  prosearchresult
+*/
+const Prosearch = () => import('@/views/profile/ProsearchResult')
 
 
 /*
@@ -116,7 +120,15 @@ const routes =  [
       meta: {        
         isUseCache: false,  // 这个字段的意思稍后再说      
         keepAlive: true  // 通过此字段判断是否需要缓存当前组件  
-    }  
+       }  
+    },
+    {
+      path: '/prosearch',
+      component: Prosearch,
+      meta: {        
+        isUseCache: false,  // 这个字段的意思稍后再说      
+        keepAlive: true  // 通过此字段判断是否需要缓存当前组件  
+       }  
     },
     {
       path: '/about',

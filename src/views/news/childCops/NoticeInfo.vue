@@ -3,17 +3,17 @@
 		<el-row>
 			<el-button style="float: right;">删除所有信息</el-button>
 		</el-row>
-		<el-row>
-			您总共收到{{}}条信息
+		<el-row style="margin-bottom: 20px;font-size: 22px;color: #000000;">
+			您总共收到 <span style="color: red;">{{objectresult.length}}</span> 条信息
 		</el-row>
-		<el-row v-for="(n, index) in 3" :key="index" style="margin-bottom: 20px;">
+		<el-row v-for="(item, index) in objectresult" :key="index" style="margin-bottom: 20px;">
     			<div class="noticeCards" id="noticeCards" >
 						<el-container style="width:100%;">
-							<el-aside style="width: 20%"><img :src= "objectresult[n-1].url" style="width: 115px;height: 118px; background-size: cover;margin-left: 20px;"></el-aside>
+							<el-aside style="width: 20%"><img :src= "item.url" style="width: 115px;height: 118px; background-size: cover;margin-left: 20px;"></el-aside>
 							<el-main style="width: 80%;">
 								<el-row style="margin-bottom:8px;">
-									<el-col :span="21" ><div class="bg-purple">企查查向您发来一条信息</div></el-col>
-									<el-col :span="3"><div class="grid-content1" style="font-size: 15px;color: #6D6B6B;opacity: 0.62;" >12:23</div></el-col>
+									<el-col :span="22" ><div class="bg-purple">企查查向您发来一条信息</div></el-col>
+									<el-col :span="2"><div class="grid-content1" style="font-size: 15px;color: #6D6B6B;opacity: 0.62;" >12:23</div></el-col>
 								</el-row>
 								<el-row >
 									<div style="width: 100%;height:38px;font-size:15px;
@@ -23,7 +23,7 @@
 								    </div>
 	                             </el-row>
 	                             <el-row>
-	                             	 <div class="grid-content1" style="font-size: 15px;color: #6D6B6B;opacity: 1; margin-top:5px;float: right;" @click="goProDetailed(objectresult[n-1].company_name) ">查看详情<i class="el-icon-caret-right"></i></div>
+	                             	 <div class="grid-content1" style="font-size: 15px;color: #6D6B6B;opacity: 1; margin-top:5px;float: right;" @click="goProDetailed(item[n-1].company_name) ">查看详情<i class="el-icon-caret-right"></i></div>
 	                             </el-row>
 							</el-main>
 						</el-container>
@@ -68,7 +68,7 @@
 	width: 90%;
 	margin-left: 5%;
 }
-	.noticeCards{
+.noticeCards{
 height: 134px;
 	background: white;
 	padding-top: 10px ;

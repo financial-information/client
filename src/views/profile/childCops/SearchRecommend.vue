@@ -9,16 +9,16 @@
     	</div>
     	<div class="profile_cards_body">
     		<el-row :gutter="80" style="margin-bottom: 20px;">
-    			<el-col :span="8" v-for="(i,item) in objecttop" :key="item" style="">
+    			<el-col :span="8" v-for="(item,index) in objecttop" :key="index" style="">
     				<div class="bg-purple"style="text-align: center;background: #FFFFFF;box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.27);">
-	    				<img :src= "i.url" style="width: 288px;height: 250px; background-size: cover;margin-bottom: 15px;">
-						 <div style="font-size: 31px;text-align: center;margin-bottom: 15px;"><span>{{i.stock_name}}</span></div>
-	                     <el-button style="margin-bottom: 10px;"  @click="goProDetailed(i.stock_name)">查看详情</el-button>
+	    				<img :src= "item.url" style="width: 288px;height: 250px; background-size: cover;margin-bottom: 15px;">
+						 <div style="font-size: 31px;text-align: center;margin-bottom: 15px;"><span>{{item.stock_name}}</span></div>
+	                     <el-button style="margin-bottom: 10px;"  @click="goProDetailed(item.stock_name)">查看详情</el-button>
     			    </div>
     			</el-col>
     		</el-row>
 
-			<el-row v-for="(n, index) in 2" :key="index" :gutter="80" style="margin-bottom: 20px;">
+			<el-row v-for="(n, index) in (objectmain.length/2)" :key="index" :gutter="80" style="margin-bottom: 20px;">
     			<el-col :span="12" v-for="(j, index) in 2" :key="index">
     				<div class="profileCards" id="profileCards" >
 						<div style="margin-bottom: 15px;">
@@ -75,12 +75,22 @@
     	{
     		url:require('@/assets/img/home/豆腐的.jpg'),
     		stock_name:'平安银行'
-    	},{
+    	},
+    	{
     		url:require('@/assets/img/home/豆腐的.jpg'),
     		stock_name:'建设银行'
-    	},{
+    	},
+    	{
     		url:require('@/assets/img/home/豆腐的.jpg'),
     		stock_name:'农业银行'
+    	},
+    	{
+    		url:require('@/assets/img/home/豆腐的.jpg'),
+    		stock_name:'平安银行'
+    	},
+    	{
+    		url:require('@/assets/img/home/豆腐的.jpg'),
+    		stock_name:'建设银行'
     	}
     	]
 			}

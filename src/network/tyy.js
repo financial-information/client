@@ -12,3 +12,10 @@ export function getCompanyMinute(data) {
 		url: 'company_database/company_basic_data/' + data.id + '/'
 	})
 }
+
+//搜索企业接口
+export function searchCompanyData(data) {
+    return request({
+    	url: '/company_database/company_basic_data/?company_name=' + data
+    })
+}
