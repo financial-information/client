@@ -22,6 +22,9 @@ const mutations = {
       for(let i in state.cartList) {
         state.cartList[i].checked = false
       }
+  },
+  updateSession(state, data) {
+    state.session = data
   }
 }
 

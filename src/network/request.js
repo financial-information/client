@@ -1,12 +1,15 @@
 import axios from 'axios'
 
+
+
 export function request(config) {
 
   const instance = axios.create({
     baseURL: 'http://127.0.0.1:8000/',
-    timeout: 5000
+    timeout: 5000,
+    withCredentials: true
   })
-
+  axios.defaults.withCredentials = true; // 允许携带cookie
 
   instance.interceptors.request.use(config => {
     return config
@@ -19,7 +22,7 @@ export function request(config) {
   }, err => {
     console.log(err)
   })
-  return instance(config)
+  return instance(config.url)
 }
 
 export function requestPost(config) {
