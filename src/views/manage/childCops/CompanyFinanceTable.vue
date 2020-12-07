@@ -9,20 +9,44 @@
           <template slot-scope="item">
             <el-form label-position="left" inline class="demo-table-expand">
               <el-form-item class="form_item">
-                <el-col class="col_title" :span="5">统一社会信用代码:</el-col><el-col :span="7">{{ item.row.credit_code }}</el-col>
-                <el-col class="col_title" :span="5">公司中文全称:</el-col><el-col :span="7">{{ item.row.company_name }}</el-col>
-                <el-col class="col_title" :span="5">工商登记号:</el-col><el-col :span="7">{{ item.row.business_code }}</el-col>
-                <el-col class="col_title" :span="5">注册资本(百万元):</el-col><el-col :span="7">{{ item.row.registered_capital }}</el-col>
-                <el-col class="col_title" :span="5">公司办公电话:</el-col><el-col :span="7">{{ item.row.phone }}</el-col>
-                <el-col class="col_title" :span="5">注册地址:</el-col><el-col :span="7">{{ item.row.registered_address }}</el-col>
-                <el-col class="col_title" :span="5">公司网站:</el-col><el-col :span="7">{{ item.row.website }}</el-col>
-                <!-- <e class="col_title"l-col :span="5">省份:</el-col><el-col :span="7">{{ item.row.phone }}</el-col>
-                <el-col class="col_title" :span="5">地级市:</el-col><el-col :span="7">{{ item.row.phone }}</el-col> -->
-                <el-col class="col_title" :span="5">股票类型:</el-col><el-col :span="7">{{ item.row.stock_type + '1'}}</el-col>
-                <el-col class="col_title" :span="5">经营范围:</el-col><el-col :span="7">{{ item.row.business_scope }}</el-col>
-                <el-col class="col_title" :span="5">是否软删除:</el-col><el-col :span="7">{{ item.row.deteled }}</el-col>
-                <el-col class="col_title" :span="24">公司简介:</el-col>
-                <el-col :span="24">{{item.row.profile}}</el-col>
+
+<!-- roa 总资产净利率ROA
+total_assets  总资产
+total_liabilities 总负债
+asset_liability_ratio 资产负债率
+net_profit  净利润
+net_assets  净资产
+roe 净资产收益率ROE
+total_profit  利润总额
+current_ratio 流动比率
+net_assets_per_share  每股净资产
+operating_income_per_share  每股营业收入
+enterprise_value  企业价值
+equity_multiplier 权益乘数
+cash_return 全部资产现金回报率
+quick_ratio 速动比率
+sale_net_profit 销售净利率 -->
+
+
+                <el-col class="col_title" :span="5">总资产周转率ROA:</el-col><el-col class="col_content" :span="17">{{ showContent(item.row.roa) }}</el-col>
+                <el-col class="col_title" :span="5">总资产:</el-col><el-col class="col_content" :span="17">{{ showContent(item.row.total_assets) }}</el-col>
+                <el-col class="col_title" :span="5">总负债:</el-col><el-col class="col_content" :span="17">{{ showContent(item.row.total_liabilities) }}</el-col>
+                <el-col class="col_title" :span="5">资产负债率:</el-col><el-col class="col_content" :span="17">{{ showContent(item.row.asset_liability_ratio) }}</el-col>
+                <el-col class="col_title" :span="5">净利润:</el-col><el-col class="col_content" :span="17">{{ showContent(item.row.net_profit) }}</el-col>
+                <el-col class="col_title" :span="5">净资产:</el-col><el-col class="col_content" :span="17">{{ showContent(item.row.net_assets) }}</el-col>
+                <el-col class="col_title" :span="5">净资产收益率ROE:</el-col><el-col class="col_content" :span="17">{{ showContent(item.row.roe) }}</el-col>
+                <el-col class="col_title" :span="5">利润总额:</el-col><el-col class="col_content" :span="17">{{ showContent(item.row.total_profit) }}</el-col>
+                <el-col class="col_title" :span="5">流动比率:</el-col><el-col class="col_content" :span="17">{{ showContent(item.row.current_ratio) }}</el-col>
+                <el-col class="col_title" :span="5">每股净资产:</el-col><el-col class="col_content" :span="17">{{ showContent(item.row.net_assets_per_share) }}</el-col>
+                <el-col class="col_title" :span="5">每股营业收入:</el-col><el-col class="col_content" :span="17">{{ showContent(item.row.operating_income_per_share) }}</el-col>
+                <el-col class="col_title" :span="5">企业价值:</el-col><el-col class="col_content" :span="17">{{ showContent(item.row.enterprise_value) }}</el-col>
+                <el-col class="col_title" :span="5">权益乘数:</el-col><el-col class="col_content" :span="17">{{ showContent(item.row.equity_multiplier) }}</el-col>
+                <el-col class="col_title" :span="5">全部资产现金回报率:</el-col><el-col class="col_content" :span="17">{{ showContent(item.row.cash_return) }}</el-col>
+                <el-col class="col_title" :span="5">速动比率:</el-col><el-col class="col_content" :span="17">{{ showContent(item.row.quick_ratio) }}</el-col>
+                <el-col class="col_title" :span="5">销售净利率:</el-col><el-col class="col_content" :span="17">{{ showContent(item.row.sale_net_profit) }}</el-col>
+
+
+                <!-- <el-col :span="24">{{item.row.profile}}</el-col> -->
               </el-form-item>
             </el-form>
           </template>
@@ -40,12 +64,8 @@
           prop="stock_name">
         </el-table-column>
         <el-table-column
-          label="企业法人"
-          prop="legal_representative">
-        </el-table-column>
-        <el-table-column
-          label="成立时间"
-          prop="found_date">
+          label="总股本"
+          prop="total_share_capital">
         </el-table-column>
 
         
@@ -59,14 +79,14 @@
             <el-button
               size="mini"
               type="danger"
-              v-if="!deleted(scope.row)"
+              v-if="false"
               @click="handleDelete(scope.$index, scope.row)">删除</el-button>
             
             <el-button
               size="mini"
               type="danger"
-              v-if="deleted(scope.row)"
-              disabled>已删除</el-button>
+              v-if="true"
+              disabled>不可删除</el-button>
           </template>
         </el-table-column>
 
@@ -92,7 +112,7 @@
         <el-input class="go_page" size="mini" v-model="tempPage" maxlength="3"></el-input>
         页
         <el-button type="primary" size="mini" @click="directTo">前往</el-button>
-        <el-button type="success" size="mini" @click="addModelVisible = true">新增数据</el-button>
+        <!-- <el-button type="success" size="mini" @click="addModelVisible = true">新增数据</el-button> -->
       </div>
       
     </div>
@@ -164,10 +184,7 @@
 
 <script>
 import { 
-  getCompanyBasicData,
-  getCompanyBasicDataByPage, 
-  updateCompanyBasicData,
-  addCompanyBasicData
+  getCompanyFinanceDataByPage,
 } from '@/network/yz'
 export default {
 
@@ -195,7 +212,7 @@ export default {
         phone: '86-755-82080387',
         registered_address: '广东省深圳市罗湖区深南东路5047号',
         website: 'www.bank.pingan.com',
-        profile: '平安银行股份有限公司是中国第一家面向社会公众公开发行股票并上市的商业银行.主营业务经营范围是经有关监管机构批准的各项商业银行业务.公司在22个经济发达城市设立了约300家分支机构的全国性商业银行,在北京、香港设立代表处,并与境外众多国家和地区的600多家银行建立了代理行关系。2019年，本行在国内外机构组织的评选活动中荣获诸多荣誉与奖项，2019年1月，在中国互联网新闻中心举办的2018年度“优秀金融扶贫先锋榜”评选活动中，本行获评“精准扶贫先锋机构”；2019年12月，由金融时报社主办、国家金融与发展实验室提供学术支持的“2019中国金融机构金牌榜·金龙奖”评选，本行荣膺“年度最具竞争力银行”；2019年12月，在中国宋庆龄基金会、海南省人民政府、中国农业电影电视中心、央视网和海南省农业农村厅、琼海市人民政府联合多家单位共同主办的“2019美丽乡村博鳌国际峰会”上，本行先后荣获主办方授予的“精准扶贫先锋单位”、“乡村振兴示范单位”、“2019美丽乡村博鳌国际峰会理事单位”、“2019美丽乡村博鳌国际峰会优秀组织单位”等荣誉奖项。',
+        profile: '平安银行股份有限公司是中国第一家面向社会公众公开发行股票并上市的商业银行.主营业务经营范围是经有关监管机构批准的各项商业银行业务.公司在22个经济发达城市设立了约300家分支机构的全国性商业银行,在北京、香港设立代表处,并与境外众多国家和地区的600多家银行建立了代理行关系2019年，本行在国内外机构组织的评选活动中荣获诸多荣誉与奖项，2019年1月，在中国互联网新闻中心举办的2018年度“优秀金融扶贫先锋榜”评选活动中，本行获评“精准扶贫先锋机构”；2019年12月，由金融时报社主办、国家金融与发展实验室提供学术支持的“2019中国金融机构金牌榜·金龙奖”评选，本行荣膺“年度最具竞争力银行”；2019年12月，在中国宋庆龄基金会、海南省人民政府、中国农业电影电视中心、央视网和海南省农业农村厅、琼海市人民政府联合多家单位共同主办的“2019美丽乡村博鳌国际峰会”上，本行先后荣获主办方授予的“精准扶贫先锋单位”、“乡村振兴示范单位”、“2019美丽乡村博鳌国际峰会理事单位”、“2019美丽乡村博鳌国际峰会优秀组织单位”等荣誉奖项',
         stock_type: '1001100000011000000',
         business_scope: '经有关监管机构批准的各项商业银行业务',
         listed: 1,
@@ -207,18 +224,18 @@ export default {
     }
   },
   mounted() {
-    this.getCompanyBasicDataList()
+    this.getCompanyFinanceDataByPage()
   },
   methods: {
     /*
       获取数据函数
     */
     // 初始化数据获取
-    getCompanyBasicDataList() {
+    getCompanyFinanceDataByPage() {
       let data = {
         "page": 1
       }
-      getCompanyBasicDataByPage(data).then(res => {
+      getCompanyFinanceDataByPage(data).then(res => {
         console.log(res)
         this.tableData = res.results
         // console.log(Math.ceil(res.count / 10))
@@ -231,8 +248,9 @@ export default {
       let data = {
         "page": page
       }
-      getCompanyBasicDataByPage(data).then(res => {
+      getCompanyFinanceDataByPage(data).then(res => {
         console.log(res)
+
         this.tableData = res.results
       })
     },
@@ -242,14 +260,24 @@ export default {
     handleCurrentChange(val) {
       this.getDataFromPage(val)
     },
-
+    /*
+      处理数据
+    */
+    showContent(data) {
+      if(data == "")
+        return "------"
+      let str_arr = data.replaceAll(";", "-")
+      return str_arr
+    },
     /*
       click 触发事件
     */
+    // 跳转页面
     directTo() {
       this.currentPage = parseInt(this.tempPage)
       this.getDataFromPage(this.currentPage)
     },
+    // 删除数据
     handleDelete(index, row) {
 
       this.$confirm('此操作将删除该数据且不会展示给用户, 是否继续?', '提示', {
@@ -326,6 +354,11 @@ export default {
   font-weight: bolder;
   color:rgb(73, 77, 194);
 }
+.col_content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .company_information_table {
   overflow: auto;
   width: 100%; 
@@ -375,7 +408,7 @@ export default {
 "listed": 1,
 "name": "123",
 "phone": "86-755-82080387",
-"profile": "平安银行股份有限公司是中国第一家面向社会公众公开发行股票并上市的商业银行.主营业务经营范围是经有关监管机构批准的各项商业银行业务.公司在22个经济发达城市设立了约300家分支机构的全国性商业银行,在北京、香港设立代表处,并与境外众多国家和地区的600多家银行建立了代理行关系。2019年，本行在国内外机构组织的评选活动中荣获诸多荣誉与奖项，2019年1月，在中国互联网新闻中心举办的2018年度“优秀金融扶贫先锋榜”评选活动中，本行获评“精准扶贫先锋机构”；2019年12月，由金融时报社主办、国家金融与发展实验室提供学术支持的“2019中国金融机构金牌榜·金龙奖”评选，本行荣膺“年度最具竞争力银行”；2019年12月，在中国宋庆龄基金会、海南省人民政府、中国农业电影电视中心、央视网和海南省农业农村厅、琼海市人民政府联合多家单位共同主办的“2019美丽乡村博鳌国际峰会”上，本行先后荣获主办方授予的“精准扶贫先锋单位”、“乡村振兴示范单位”、“2019美丽乡村博鳌国际峰会理事单位”、“2019美丽乡村博鳌国际峰会优秀组织单位”等荣誉奖项。",
+"profile": "平安银行股份有限公司是中国第一家面向社会公众公开发行股票并上市的商业银行.主营业务经营范围是经有关监管机构批准的各项商业银行业务.公司在22个经济发达城市设立了约300家分支机构的全国性商业银行,在北京、香港设立代表处,并与境外众多国家和地区的600多家银行建立了代理行关系2019年，本行在国内外机构组织的评选活动中荣获诸多荣誉与奖项，2019年1月，在中国互联网新闻中心举办的2018年度“优秀金融扶贫先锋榜”评选活动中，本行获评“精准扶贫先锋机构”；2019年12月，由金融时报社主办、国家金融与发展实验室提供学术支持的“2019中国金融机构金牌榜·金龙奖”评选，本行荣膺“年度最具竞争力银行”；2019年12月，在中国宋庆龄基金会、海南省人民政府、中国农业电影电视中心、央视网和海南省农业农村厅、琼海市人民政府联合多家单位共同主办的“2019美丽乡村博鳌国际峰会”上，本行先后荣获主办方授予的“精准扶贫先锋单位”、“乡村振兴示范单位”、“2019美丽乡村博鳌国际峰会理事单位”、“2019美丽乡村博鳌国际峰会优秀组织单位”等荣誉奖项",
 "region": "123",
 "registered_address": "广东省深圳市罗湖区深南东路5047号",
 "registered_capital": "19405918198",
