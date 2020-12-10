@@ -165,8 +165,8 @@ export default {
             path: "/home"
           },
           {
-            text: "论坛",
-            path: "/comment"
+            text: "企业",
+            path: "/profile"
           },
           {
             text: "新闻",

@@ -2,96 +2,91 @@
   
     <div class="information" >
     <el-container  style="width: 80%;text-align: center;margin-left: 10%;margin-bottom: 50px;">
-  <el-aside style="width:45%;margin-right: 5%;" >
-    <el-select v-model="period"
-              placeholder="请选择活动区域"
-              style="min-width:100%;">
-              <el-option v-for="item in attributeList"
-                :key="item.type"
-                :label="item.name"
-                :value="item.type">
-              </el-option>
-</el-select>
-   <el-tabs v-model="activename" @tab-click="handleClick" type="border-card">
-    <el-tab-pane label="行情指数"  for="Quotation" name="one">
-      <div id="Quotation" v-show="period === 'Sz'" >
-        <div id="charts10" style="width:350px;height:300px;">
+  <el-aside style="width:65%;" >
+    <!-- 日期选择器 -->
+        <div class="block">
+            <el-cascader
+            placeholder="上海市场指数列表/上证指数"
+            :options="mainType"
+            v-model="choose_type"
+            class="select"
+            @change="changeType"
+            filterable>
+            </el-cascader>
+
+            <el-date-picker
+              v-model="choose_date"
+              type="daterange"
+              align="left"
+              class="date_edit"
+              unlink-panels
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+              :picker-options="pickerOptions"
+              value-format="yyyy-MM-dd"
+              @change="dateChange">
+            </el-date-picker>
+
+            <el-button type="primary" class="change_btn" @click="sendData">切换</el-button>
+        </div>
+
+    
+
+
+   <el-tabs v-model="activeName" @tab-click="handleClick" type="border-card">
+    <el-tab-pane label="开盘价"  name="one" :key="'one'">
+      <div>
+        <div id="open" ref="one" class="main_charts">
+
+        </div>
+      </div>
+      
+    </el-tab-pane>
+    <el-tab-pane label="收盘价"  name="two" :key="'two'">
+      <div>
+        <div id="close" ref="two" class="main_charts">
+
+        </div>
+      </div>
+      
+    </el-tab-pane>
+    <el-tab-pane label="最高价"  name="three" :key="'three'">
+      <div>
+        <div id="high" ref="three" class="main_charts">
+
+        </div>
+      </div>
+      
+    </el-tab-pane>
+    <el-tab-pane label="最低价"  name="four" :key="'four'">
+      <div>
+        <div id="low" ref="four" class="main_charts">
+
+        </div>
+      </div>
+      
+    </el-tab-pane>
+    <el-tab-pane label="行情指数(总-K线图)" name="five" :key="'five'">
+
+      <div>
+        <div id="exponent_charts" ref="five" class="main_charts">
+
         </div>
       </div>
 
-      <div id="Quotation" v-show="period === 'Sh'">
-        <div id="charts20" style="width:350px;height:300px;">
-        </div>
-      </div>
-      <div id="Quotation" v-show="period === 'Startup'">
-        <div id="charts30" style="width:350px;height:300px;">
-        </div>
-      </div>
-      <div id="Quotation" v-show="period === 'Smes'">
-        <div id="charts40" style="width:350px;height:300px;">
-        </div>
-      </div>
-      <div id="Quotation" v-show="period === 'Star'">
-        <div id="charts50" style="width:350px;height:300px;">
-        </div>
-      </div>
+      
+
     </el-tab-pane>
 
 
-    <el-tab-pane label="上市股票趋势"  for="Trend" name="two">
-      <div id="Trend" v-show="period === 'Sz'">
-        <div id="charts11" style="width:350px;height:300px;">
-        </div>
-      </div>
-      <div id="Trend" v-show="period === 'Sh'">
-           <div id="charts21" style="width:350px;height:300px;">
-        </div>
-      </div>
-      <div id="Trend" v-show="period === 'Startup'">
-            <div id="charts31" style="width:350px;height:300px;">
-        </div>
-      </div>
-      <div id="Trend" v-show="period === 'Smes'">
-           <div id="charts41" style="width:350px;height:300px;">
-        </div>
-      </div>
-       <div id="Trend" v-show="period === 'Star'">
-            <div id="charts51" style="width:350px;height:300px;">
-        </div>
-       </div>
-    </el-tab-pane>
     
   </el-tabs>
     
 
-   <!--  <el-row>
-      <el-col :span="4"><label for="Quotation">行情指数</label> </el-col>
-      <el-col :span="8">  <label for="Trend">上市股票趋势</label> </el-col>
-      <el-col  :offset="6" :span="6">  <el-select v-model="value" placeholder="请选择">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select></el-col> --><!-- 
-  <el-tabs type="border-card">
-  <el-tab-pane label="用户管理">用户管理</el-tab-pane>
-  <el-tab-pane label="配置管理">配置管理</el-tab-pane>
-</el-tabs>
-<el-col  :offset="6" :span="6">  <el-select v-model="value" placeholder="请选择">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select></el-col> -->
-    <!-- </el-row> -->
 
 
   </el-aside>
-  <el-main  style="width:50%;padding: 0px;">
+  <el-main  style="width:35%;">
      <el-tabs v-model="activeName" @tab-click="handleClick">
     <el-tab-pane label="市场总览" name="first">
       <div>
@@ -110,322 +105,573 @@
 <script> 
 import echarts from 'echarts'
 import getTestData from '@/network/get.js'
+
+import { 
+    getXSHGExponentType, 
+    getXSHEExponentType, 
+    getExponentData 
+} from "@/network/yz"
+
 export default {
 
- name: 'Information',
-  computed: {
-time(){
-switch (this.period) {
-       case 'Sz':
-         return '每年的:'
-       case 'Sh':
-         return '每月的:'
-       case 'Startup':
-         return '每日的:'
-      case 'Smes':
-         return '每日的:'
-        case 'Star':
-         return '每日的:'
+    name: 'Information',
+    data () {
+        return {
+      	    col: {
+                name: "网站"
+            },
+            activeName: 'one', 
+            mainType: [
+            {
+                label: '上海市场指数列表',
+                value: 'SZ',
+                children: []
+            },
+            {
+                label: '深圳市场指数列表',
+                value: 'SH',
+                children: []
+            },
+           
+            ],
+            detailType: [
+            ],
+            mainTypeItem: '上海市场指数列表',            // 默认上海
+            detailTypeItem: '上证指数',
+            // 上海
+            XSHG_list: [],
+            // 深圳
+            XSHE_list: [],
+            // 图表数据
+            echarts_data: [
+            ],
+            // 各类数据数组
+            open_arr: [],
+            close_arr: [],
+            hight_arr: [],
+            low_arr: [],
+            time_arr: [],
+            // 给时期选择器做好一些快捷选项
+            pickerOptions: {
+                shortcuts: [{
+                  text: '最近一周',
+                  onClick(picker) {
+                    const end = new Date();
+                    const start = new Date();
+                    start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                    picker.$emit('pick', [start, end]);
+                  }
+                }, {
+                  text: '最近一个月',
+                  onClick(picker) {
+                    const end = new Date();
+                    const start = new Date();
+                    start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                    picker.$emit('pick', [start, end]);
+                  }
+                }, {
+                  text: '最近三个月',
+                  onClick(picker) {
+                    const end = new Date();
+                    const start = new Date();
+                    start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                    picker.$emit('pick', [start, end]);
+                  }
+                }, {
+                  text: "最近一年",
+                  onClick(picker) {
+                    const end = new Date();
+                    const start = new Date();
+                    start.setTime(start.getTime() - 3600 * 1000 * 24 * 365);
+                    picker.$emit('pick', [start, end]);
+                  }
+                }]
+            },
+            // 对应的选择日期后的值
+            choose_date: [],
+            // 对应的选择类型后的值
+            choose_type: [],
+        }
+    },
+    mounted(){
+        // 获取上海指数列表
+        this.getXSHGExponentType()
+        // 获取深圳指数列表
+        this.getXSHEExponentType()
+        // 获取初始化数据
+        this.initExponentData()
         
-       default:
-         return ''
-     }
-}
-},
+    },
+    methods: {
+        handleClick(tab) {
+            let name = ""
+            let fun_data = [] 
+            switch(tab.name) {
+                case "one":
+                    name = "open"
+                    fun_data = this.open_arr
+                    break;
+                case "two":
+                    name = "close"
+                    fun_data = this.close_arr
+                    break;
+                case "three":
+                    name = "high"
+                    fun_data = this.hight_arr
+                    break;
+                case "four":
+                    name = "low"
+                    fun_data = this.low_arr
+                    break;
+                case "five":
+                    let temp1 = this.initChartsKGraph
+                    let mydata = []
+                    for(let i = 0; i < this.echarts_data.length; i++) {
+                        let temp_data = []
+                        for(let j = 0; j < this.echarts_data[i].length; j++) {
+                            temp_data[j] = this.echarts_data[i][j]
+                        }
+                        mydata.push(temp_data)
+                    }
+                    setTimeout(function() {
+                        temp1(mydata)
+                    }, 100)
+                    return;
+                default:
+                    break;
+            }
+            let fun = this.initLineChart
+            let fun_time = this.time_arr
+            setTimeout(function() {
+                fun(name, fun_data, fun_time)
+            }, 0)
+        },
+        /******
+            获取数据
+        ******/
+        // 获取上海指数列表
+        getXSHGExponentType() {
+            getXSHGExponentType().then(res => {
+                this.XSHG_list = res.result
+                // 初始默认值为上证指数列表
+                this.mainType[0].children = this.XSHG_list
+            }).catch(err => {
+                this.$message.error("网络状态不好")
+            })
+        },
+        // 获取深圳指数列表
+        getXSHEExponentType() {
+            getXSHEExponentType().then(res => {
+                this.XSHE_list = res.result
+                this.mainType[1].children = this.XSHE_list
+            }).catch(err => {
+                this.$message.error("网络状态不好")
+            })
+        },
+        // 获取对应的指数信息
+        getExponentData(mydata) {
+            getExponentData(mydata).then(res => {
+                // 获取对象的长度
+                length = Object.getOwnPropertyNames(res.result.open).length
+                // 定义临时数据
+                let temp_all_data = []
+                let temp_open_data = []
+                let temp_close_data = []
+                let temp_high_data = []
+                let temp_low_data = []
+                let temp_time_data = []
+                for(let i = 0; i < length; i++) {
+                    temp_open_data.push(res.result.open['data_' + i])
+                    temp_close_data.push(res.result.close['data_' + i])
+                    temp_high_data.push(res.result.high['data_' + i])
+                    temp_low_data.push(res.result.low['data_' + i])
+                    temp_time_data.push(res.result.time['data_' + i])
+                    // 临时子数组数据
+                    let temp_all_item = []
+                    temp_all_item.push(res.result.time['data_' + i])
+                    temp_all_item.push(res.result.open['data_' + i])
+                    temp_all_item.push(res.result.close['data_' + i])
+                    temp_all_item.push(res.result.high['data_' + i])
+                    temp_all_item.push(res.result.low['data_' + i])
+                    // 加入到临时总数据
+                    temp_all_data.push(temp_all_item)
+                }
+                // 赋值
+                this.echarts_data = temp_all_data
+                this.open_arr = temp_open_data
+                this.close_arr = temp_close_data
+                this.hight_arr = temp_high_data
+                this.low_arr = temp_low_data
+                this.time_arr = temp_time_data
+                
+                // 数据处理完之后
+                // 初始化图形,开盘价
+                let myName = {
+                    "name": this.activeName
+                }
+                this.handleClick(myName)
+            }).catch(err => {
+                this.$message.error("网络异常")
+            })
+        },
+        // 初始化对应的指数信息
+        initExponentData() {
+            let data = {
+                "stock_code": "000001.XSHG",
+                "start_time": "2017-12-25",
+                "end_time": "2017-12-30" 
+            }
+            // 将参数带入
+            this.getExponentData(data)
 
-  data () {
-    return {
-      
-    	col: {
-           name: "网站"
-      },
-      activeName: 'second', 
-      activename:'one',
-    attributeList: [
-         {
-           name: '深圳指数',
-           type: 'Sz'
-         },
-         {
-           name: '上证指数',
-           type: 'Sh'
-         },
-         {
-           name: '创业板',
-           type: 'Startup'
-         },
-         {
-           name: '中小企业板',
-           type: 'Smes'
-         },
-         {
-           name: '科创板',
-           type: 'Star'
-         }
-       ],
-     period: 'Sz',            // 默认深
-     option:{
-                    color:['rgb(8,252,7)','rgb(255,168,0)',],
-                    title: {
-                        text: ''
-                    },
-                    tooltip: { //提示框
-                        trigger: 'axis',
-                    },
-                    legend: {//图例的类型
-                        icon:'roundRect',//图例icon图标
-                        data: [
-                            {
-                                name:"上年",
-                                textStyle: {
-                                    color: '#fff'
-                                }
-                                
-                            },{
-                                name:"本年",
-                                textStyle: {
-                                    color: '#fff'
-                                }
-                            },
-                        ],
-                        
-                    },
-                    grid: {
-                        left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        top:'17%',
-                        containLabel: true //grid区域是否包含坐标轴的刻度标签
-                    },
-                    xAxis: {
-                        type: 'category', //坐标轴类型。
-                        boundaryGap: false, //坐标轴两边留白策略
-                        data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月','8月','9月','10月','11月','12月'],
-                        axisLabel: {//坐标轴刻度标签的相关设置
-                            interval:0,
-                            textStyle: {
+            // 初始化时间选择器上的数据
+            this.choose_date.push("2017-12-25")
+            this.choose_date.push("2017-12-30")
+            // 初始化种类上的数据
+            this.choose_type.push("SZ")
+            this.choose_type.push("000001.XSHG")
+        },
+        /*
+            触发改变
+        */
+        // 日期改变
+        dateChange() {
+            
+        },
+        // 类型改变
+        changeType() {
+            
+        },
+        /*
+            点击按钮触发事件
+        */
+        sendData() {
+            let start_time = this.choose_date[0], end_time = this.choose_date[1], stock_code = this.choose_type[1]
+            let data = {
+                "start_time": start_time,
+                "end_time": end_time,
+                "stock_code": stock_code
+            }
+            this.getExponentData(data)
+
+        },
+
+        /////////////////////////////////////////////////
+        // 普通折线图
+        initLineChart(name, base_data, time_data) {
+
+            let mycharts = this.$echarts.init(document.getElementById(name))
+
+            let option = {
+                tooltip: {
+                    trigger: 'axis',
+                    position: function (pt) {
+                        return [pt[0], '10%'];
+                    }
+                },
+                title: {
+                    left: 'center',
+                    text: '大数据量面积图',
+                },
+                toolbox: {
+                    feature: {
+                        dataZoom: {
+                            yAxisIndex: 'none'
+                        },
+                        restore: {},
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: time_data
+                },
+                yAxis: {
+                    type: 'value',
+                    boundaryGap: [0, '100%']
+                },
+                dataZoom: [{
+                    type: 'inside',
+                    start: 0,
+                    end: 10
+                }, {
+                    start: 0,
+                    end: 10,
+                handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+                        handleSize: '80%',
+                        handleStyle: {
                             color: '#fff',
-                            fontSize :10
-                            },
-                        },
-                        axisLine:{//坐标轴轴线相关设置
-                            show :true,
-                            lineStyle:{
-                                color:'rgb(2,121,253)'
-                            }
-                        },
-                        axisTick:{ //坐标轴刻度相关设置。
-                            show :false,
+                            shadowBlur: 3,
+                            shadowColor: 'rgba(0, 0, 0, 0.6)',
+                            shadowOffsetX: 2,
+                            shadowOffsetY: 2
                         }
-                    },
-                    yAxis: {
-                        type: 'value',
-                        axisLabel: { //x轴的坐标文字
-                            show: true,
-                            textStyle: {
-                                color: '#fff' //文字的颜色
-                            },
-                            
-                        },
-                        max:100,//最大值100
-                        axisLine:{//坐标轴轴线相关设置
-                            show :true,
-                            lineStyle:{
-                                color:'rgb(2,121,253)'
-                            }
-                        },
-                        axisTick:{ //坐标轴刻度相关设置。
-                            show :false,
-                        },
-                        splitLine:{  //坐标在grid区域的分割线
-                        　 lineStyle: { //设置分割线的样式(图表横线颜色)
-                                color: ['#153a8a']
-                            }
-                        }
-                    },
+                    }],
                     series: [
                         {
-                            name: '上年',
+                            name: '模拟数据',
                             type: 'line',
-                            data: [10,20,30,50,50,10,50,60,10,50,10,30],
-                            lineStyle:{
-                                color:'rgb(8,252,7)'  //线的颜色
-                            }
-                        },
-                        {
-                            name: '本年',
-                            type: 'line',
-                            data: [20,20,30,50,50,10,50,20,30,50,50,30],
-                            lineStyle:{
-                                color:'rgb(255,168,0)' //线的颜色
-                            }
+                            smooth: true,
+                            symbol: 'none',
+                            sampling: 'average',
+                            itemStyle: {
+                                color: 'rgb(132,174,240)'
+                            },
+                            areaStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: 'rgb(176,204,247)'
+                                }, {
+                                    offset: 1,
+                                    color: 'rgb(226,238,254)'
+                                }])
+                            },
+                            data: base_data
                         }
                     ]
-                }
-       }
-  },
-  mounted(){
-    this.draw10();
-    this.draw20();
-    this.draw30();
-    this.draw40();
-    this.draw50();
-    this.draw11();
-    this.draw21();
-    this.draw31();
-    this.draw41();
-    this.draw51();
-  },
-   methods: {
-      handleClick(tab, event) {
-        console.log(tab, event);
-      },
-      getTestData(){
+                };
+                mycharts.setOption(option)
+                return mycharts
 
-      },
-      draw10(){
-        // 基于准备好的dom，初始化echarts实例
-        let myChart = echarts.init(document.getElementById('charts10'))
-        // 绘制图表
-        myChart.setOption({
-            title: { text: '深圳指数' },
-            tooltip: {},
-            xAxis: {
-      
-                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-            },
-            yAxis: {},
-            series: [{
-                name: '销量',
-                type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
-            }]
-        });
+        },
+        //////////////////////////////////////////////////
+        // K线图
+        initChartsKGraph(mydata) {
+            let mycharts = this.$echarts.init(document.getElementById("exponent_charts"))
+            // 定义颜色
+            var upColor = '#ec0000';
+            var upBorderColor = '#8A0000';
+            var downColor = '#00da3c';
+            var downBorderColor = '#008F28';
+            // 数据意义：开盘(open)，收盘(close)，最低(lowest)，最高(highest)
+            let data0 = splitData(mydata);
+            // 定义一个切割数据的函数
+            function splitData(rawData) {
+                var categoryData = [];
+                var values = []
+                for (var i = 0; i < rawData.length; i++) {
+                    // 目录数据
+                    categoryData.push(rawData[i].splice(0, 1)[0]);
+                    // value
+                    values.push(rawData[i])
+                }
+                // 返回一个对象，包含下面两个数据
+                return {
+                    categoryData: categoryData,
+                    values: values
+                };
+            }
+            // 计算MA的值
+            function calculateMA(dayCount) {
+                var result = [];
+                for (var i = 0, len = data0.values.length; i < len; i++) {
+                    if (i < dayCount) {
+                        result.push('-');
+                        continue;
+                    }
+                    var sum = 0;
+                    for (var j = 0; j < dayCount; j++) {
+                        sum += data0.values[i - j][1];
+                    }
+                    result.push(sum / dayCount);
+                }
+                return result;
+            }
+
+
+
+            let option = {
+                title: {
+                    text: '上证指数',
+                    left: 0
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross'
+                    }
+                },
+                legend: {
+                    data: ['日K', 'MA5', 'MA10', 'MA20', 'MA30']
+                },
+                grid: {
+                    left: '10%',
+                    right: '10%',
+                    bottom: '15%'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: data0.categoryData,
+                    scale: true,
+                    boundaryGap: false,
+                    axisLine: {onZero: false},
+                    splitLine: {show: false},
+                    splitNumber: 20,
+                    min: 'dataMin',
+                    max: 'dataMax'
+                },
+                yAxis: {
+                    scale: true,
+                    splitArea: {
+                        show: true
+                    }
+                },
+                dataZoom: [
+                    {
+                        type: 'inside',
+                        start: 50,
+                        end: 100
+                    },
+                    {
+                        show: true,
+                        type: 'slider',
+                        top: '90%',
+                        start: 50,
+                        end: 100
+                    }
+                ],
+                series: [
+                    {
+                        name: '日K',
+                        type: 'candlestick',
+                        data: data0.values,
+                        itemStyle: {
+                            color: upColor,
+                            color0: downColor,
+                            borderColor: upBorderColor,
+                            borderColor0: downBorderColor
+                        },
+                        markPoint: {
+                            label: {
+                                normal: {
+                                    formatter: function (param) {
+                                        return param != null ? Math.round(param.value) : '';
+                                    }
+                                }
+                            },
+                            data: [
+                                {
+                                    name: 'XX标点',
+                                    coord: ['2013/5/31', 2300],
+                                    value: 2300,
+                                    itemStyle: {
+                                        color: 'rgb(41,60,85)'
+                                    }
+                                },
+                                {
+                                    name: 'highest value',
+                                    type: 'max',
+                                    valueDim: 'highest'
+                                },
+                                {
+                                    name: 'lowest value',
+                                    type: 'min',
+                                    valueDim: 'lowest'
+                                },
+                                {
+                                    name: 'average value on close',
+                                    type: 'average',
+                                    valueDim: 'close'
+                                }
+                            ],
+                            tooltip: {
+                                formatter: function (param) {
+                                    return param.name + '<br>' + (param.data.coord || '');
+                                }
+                            }
+                        },
+                        markLine: {
+                            symbol: ['none', 'none'],
+                            data: [
+                                [
+                                    {
+                                        name: 'from lowest to highest',
+                                        type: 'min',
+                                        valueDim: 'lowest',
+                                        symbol: 'circle',
+                                        symbolSize: 10,
+                                        label: {
+                                            show: false
+                                        },
+                                        emphasis: {
+                                            label: {
+                                                show: false
+                                            }
+                                        }
+                                    },
+                                    {
+                                        type: 'max',
+                                        valueDim: 'highest',
+                                        symbol: 'circle',
+                                        symbolSize: 10,
+                                        label: {
+                                            show: false
+                                        },
+                                        emphasis: {
+                                            label: {
+                                                show: false
+                                            }
+                                        }
+                                    }
+                                ],
+                                {
+                                    name: 'min line on close',
+                                    type: 'min',
+                                    valueDim: 'close'
+                                },
+                                {
+                                    name: 'max line on close',
+                                    type: 'max',
+                                    valueDim: 'close'
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        name: 'MA5',
+                        type: 'line',
+                        data: calculateMA(5),
+                        smooth: true,
+                        lineStyle: {
+                            opacity: 0.5
+                        }
+                    },
+                    {
+                        name: 'MA10',
+                        type: 'line',
+                        data: calculateMA(10),
+                        smooth: true,
+                        lineStyle: {
+                            opacity: 0.5
+                        }
+                    },
+                    {
+                        name: 'MA20',
+                        type: 'line',
+                        data: calculateMA(20),
+                        smooth: true,
+                        lineStyle: {
+                            opacity: 0.5
+                        }
+                    },
+                    {
+                        name: 'MA30',
+                        type: 'line',
+                        data: calculateMA(30),
+                        smooth: true,
+                        lineStyle: {
+                            opacity: 0.5
+                        }
+                    },
+            
+                ]
+            };
+            mycharts.setOption(option)
+            return mycharts
+        },
+        ////////////////////////////////////////////////////////
     }
-    ,
-    draw20(){
-        // 基于准备好的dom，初始化echarts实例
-        let myChart = echarts.init(document.getElementById('charts20'))
-        // 绘制图表
-        myChart.setOption({
-            title: { text: '上证指数' },
-            tooltip: {},
-            xAxis: {
-      
-                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-            },
-            yAxis: {},
-            series: [{
-                name: '销量',
-                type: 'bar',
-                data: [10, 5, 33, 21, 11, 19]
-            }]
-        });
-    }, 
-    draw30(){
-        // 基于准备好的dom，初始化echarts实例
-        let myChart = echarts.init(document.getElementById('charts30'))
-        // 绘制图表
-        myChart.setOption({
-            title: { text: '创业板' },
-            tooltip: {},
-            xAxis: {
-      
-                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-            },
-            yAxis: {},
-            series: [{
-                name: '销量',
-                type: 'bar',
-                data: [10, 5, 33, 21, 11, 19]
-            }]
-        });
-    }, 
-    draw40(){
-        // 基于准备好的dom，初始化echarts实例
-        let myChart = echarts.init(document.getElementById('charts40'))
-        // 绘制图表
-        myChart.setOption({
-            title: { text: '中小企业板' },
-            tooltip: {},
-            xAxis: {
-      
-                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-            },
-            yAxis: {},
-            series: [{
-                name: '销量',
-                type: 'bar',
-                data: [10, 5, 33, 21, 11, 19]
-            }]
-        });
-    }, 
-    draw50(){
-        // 基于准备好的dom，初始化echarts实例
-        let myChart = echarts.init(document.getElementById('charts50'))
-        // 绘制图表
-        myChart.setOption({
-            title: { text: '科创板' },
-            tooltip: {},
-            xAxis: {
-      
-                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-            },
-            yAxis: {},
-            series: [{
-                name: '销量',
-                type: 'bar',
-                data: [10, 5, 33, 21, 11, 19]
-            }]
-        });
-    },
-    draw11(){
-        // 基于准备好的dom，初始化echarts实例
-        let myChart = echarts.init(document.getElementById('charts11'))
-        // 绘制图表
-        myChart.setOption(this.option);
-         window.addEventListener("resize",function(){
-                myChart.resize()  // myChart 是实例对象
-            })
-    },
-    draw21(){
-        // 基于准备好的dom，初始化echarts实例
-        let myChart = echarts.init(document.getElementById('charts21'))
-        // 绘制图表
-        myChart.setOption(this.option);
-         window.addEventListener("resize",function(){
-                myChart.resize()  // myChart 是实例对象
-            })
-    },
-    draw31(){
-        // 基于准备好的dom，初始化echarts实例
-        let myChart = echarts.init(document.getElementById('charts31'))
-        // 绘制图表
-        myChart.setOption(this.option);
-         window.addEventListener("resize",function(){
-                myChart.resize()  // myChart 是实例对象
-            })
-    },
-    draw41(){
-        // 基于准备好的dom，初始化echarts实例
-        let myChart = echarts.init(document.getElementById('charts41'))
-        // 绘制图表
-        myChart.setOption(this.option);
-         window.addEventListener("resize",function(){
-                myChart.resize()  // myChart 是实例对象
-            })
-    },
-    draw51(){
-        // 基于准备好的dom，初始化echarts实例
-        let myChart = echarts.init(document.getElementById('charts51'))
-        // 绘制图表
-        myChart.setOption(this.option);
-         window.addEventListener("resize",function(){
-                myChart.resize()  // myChart 是实例对象
-            })
-    }
-    
-}
 }
 </script>
 
@@ -443,5 +689,29 @@ switch (this.period) {
 }
 .el-select{
  /* height: 250px;*/
+}
+
+.select {
+  width: 45%;
+  margin-bottom:10px;
+}
+.main_charts {
+    width:100%;
+    height:350px;
+}
+.change_btn {
+    background-color: rgb(73, 77, 194, 1);
+    border:none;
+}
+.change_btn:hover {
+    background-color: rgba(73, 77, 194, 0.8);
+
+}
+.date_edit {
+    margin-bottom:10px;
+    width: 40%;
+}
+.data_choose {
+    /*display: inline-block;*/
 }
 </style>
