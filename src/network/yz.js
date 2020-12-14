@@ -2,6 +2,7 @@ import { requestPost, request, requestPut } from './request'
 import qs from 'qs'
 
 /*  这是get  */
+// 企业基本信息
 export function getCompanyBasicData(config) {
   return request({
     url: '/company_database/company_basic_data/' + config.id + '.json'
@@ -13,6 +14,21 @@ export function getCompanyBasicDataByPage(config) {
     url: '/company_database/company_basic_data/?page=' + config.page,
   })
 }
+// 企业财务信息
+
+export function getCompanyFinanceData(config) {
+  return request({
+    url: '/company_database/company_finance_data/' + config.id + '.json'
+  })
+}
+
+export function getCompanyFinanceDataByPage(config) {
+  return request({
+    url: '/company_database/company_finance_data/?page=' + config.page,
+  })
+}
+
+
 
 
 /*  put方法  */

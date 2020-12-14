@@ -37,7 +37,7 @@
           
         </input>
         <button class="search_btn"><i class="el-icon-search"></i></button>
-        <div class="user_img">
+        <div class="user_img" @click="goToUserInfo">
           <el-image
           class="user_image"
           :src="userImg">
@@ -212,9 +212,12 @@ export default {
   },
   methods: {
     changePage(item) {
-      // console.log(item)
-      // console.log(this.$router)
-      this.$router.push(item.path)
+      if(this.$route.path != item.path)
+        this.$router.push(item.path)
+    },
+    goToUserInfo() {
+      if(this.$route.path != "/news")
+        this.$router.push("/news")
     },
     login() {
       if(this.account == "" || this.password == "") {
@@ -347,7 +350,9 @@ export default {
 
 #navbar {
   min-width: 960px;
-  margin: 10px 10%;
+  width: 80%;
+  /*margin: 10px 10%;*/
+  margin:auto;
   padding: 10px 20px;
   /*border:1px solid black;*/
 }
@@ -494,6 +499,8 @@ export default {
 .user_img {
   float: right;
   width: 40px;
+  margin-left:5px;
+  cursor: pointer;
 }
 .user_image {
   width: 40px; 
