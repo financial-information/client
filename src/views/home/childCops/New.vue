@@ -64,7 +64,7 @@ export default {
 
 <style lang="css" scoped>
 .new{
-
+min-width: 960px;
 }
 .container2{
   width: 100%;

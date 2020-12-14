@@ -1,6 +1,6 @@
 <template>
   
-    <div class="information" >
+    <div class="information"  style="min-width: 960px;">
     <el-container  style="width: 80%;text-align: center;margin-left: 10%;margin-bottom: 50px;">
   <el-aside style="width:45%;margin-right: 5%;" >
     <el-select v-model="period"

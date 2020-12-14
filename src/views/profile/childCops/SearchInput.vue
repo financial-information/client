@@ -8,18 +8,18 @@
       </div>
       <div class="profile_select">
           <el-row type="flex" class="row-bg" justify="space-between">
-              <el-col :span="5">
-                  <el-select v-model="value1" multiple  placeholder="行业">
+               <el-col :span="5">
+                  <el-select v-model="value1"  placeholder="行业">
                       <el-option
                         v-for="item in selectListOne"
-                        :key="item.type"
-                        :label="item.name"
-                        :value="item.name">
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
                       </el-option>
                   </el-select>
               </el-col>
               <el-col :span="5">
-                  <el-select v-model="value2" multiple placeholder="资本">
+                  <el-select v-model="value2"  placeholder="资本">
                       <el-option
                         v-for="item in selectListTwo"
                         :key="item.type"
@@ -29,7 +29,7 @@
                   </el-select>
               </el-col>
               <el-col :span="5">
-                  <el-select v-model="value3" multiple placeholder="时间">
+                  <el-select v-model="value3" placeholder="时间">
                       <el-option
                         v-for="item in selectListThree"
                         :key="item.type"
@@ -39,7 +39,7 @@
                   </el-select>
               </el-col>
               <el-col :span="5">
-                  <el-select v-model="value4" multiple placeholder="地区">
+                  <el-select v-model="value4"  placeholder="地区">
                       <el-option
                         v-for="item in selectListFour"
                         :key="item.type"
@@ -61,66 +61,105 @@
 				value0:'',
 				selectListOne: [
          {
-           name: '深圳指数',
-           type: 'Sz'
+           label: '全部----',
+           value: '全部----'
          },
          {
-           name: '上证指数',
-           type: 'Sh'
-         },
-         {
-           name: '创业板',
-           type: 'Startup'
-         },
-         {
-           name: '中小企业板',
-           type: 'Smes'
-         },
-         {
-           name: '科创板',
-           type: 'Star'
+           label: '金融业',
+           value: '金融业'
+         },{
+           label: '制造业',
+           value: '制造业'
+         },{
+           label: '农、林、牧、渔业',
+           value: '农、林、牧、渔业'
+         },{
+           label: '教育',
+           value: '教育'
+         },{
+           label: '房地产业',
+           value: '房地产业'
+         },{
+           label: '电力、热力、燃气及水生产和供应业',
+           value: '电力、热力、燃气及水生产和供应业'
+         },{
+           label: '采矿业',
+           value: '采矿业'
+         },{
+           label: '建筑业',
+           value: '建筑业'
+         },{
+           label: '交通运输、仓储和邮政业',
+           value: '交通运输、仓储和邮政业'
+         },{
+           label: '居民服务、修理和其他服务业',
+           value: '居民服务、修理和其他服务业'
+         },{
+           label: '科学研究和技术服务业',
+           value: '科学研究和技术服务业'
+         },{
+           label: '批发和零售业',
+           value: '批发和零售业'
+         },{
+           label: '水利、环境和公共设施管理业',
+           value: '水利、环境和公共设施管理业'
+         },{
+           label: '卫生和社会工作',
+           value: '卫生和社会工作'
+         },{
+           label: '文化、体育和娱乐业',
+           value: '文化、体育和娱乐业'
+         },{
+           label: '信息传输、软件和信息技术服务业',
+           value: '信息传输、软件和信息技术服务业'
+         },{
+           label: '住宿和餐饮业',
+           value: '住宿和餐饮业'
+         },{
+           label: '租赁和商务服务业',
+           value: '租赁和商务服务业'
          }
        ],selectListTwo: [
          {
-           name: '1000万以下',
-           type: 'Sz'
+           name: '5千万-5亿',
+           type: '5千万-5亿'
          },
          {
-           name: '1000万-2000万',
-           type: 'Sh'
+           name: '5亿-50亿',
+           type: '5亿-50亿'
          },
          {
-           name: '2000万-3000万',
-           type: 'Startup'
+           name: '50亿-150亿',
+           type: '50亿-150亿'
          },
          {
-           name: '3000万-4000万',
-           type: 'Smes'
+           name: '150亿以上',
+           type: '150亿以上'
          },
          {
-           name: '4000万以上',
-           type: 'Star'
+           name: '全部----',
+           type: '全部----'
          }
        ],selectListThree: [
          {
-           name: '2000年以前',
-           type: 'Sz'
+           name: '1949年-1965年',
+           type: '1949年-1965年'
          },
          {
-           name: '2001年-2005年',
-           type: 'Sh'
+           name: '1966年-1980年',
+           type: '1966年-1980年'
          },
          {
-           name: '2006-2010年',
-           type: 'Startup'
+           name: '1981年-2000年',
+           type: '1981年-2000年'
          },
          {
-           name: '2011年-2015年',
-           type: 'Smes'
+           name: '2001年至今',
+           type: '2001年至今'
          },
          {
-           name: '2016年至今',
-           type: 'Star'
+           name: '全部----',
+           type: '全部----'
          }
        ],selectListFour: [
          {
@@ -148,9 +187,10 @@
            type: 'Stars'
          }
        ],
-       value1:[],
-       value2:[],
-       value3:[],
+       value0:'',
+       value1:'',
+       value2:'',
+       value3:'',
        value4:[]
 			}
 		},
@@ -197,22 +237,30 @@
    margin-bottom: 51px;
 }
 .profile_search_input{
-	margin-bottom: 51px;
+	
+  width: 60%;
+  margin:  0px auto;
+  margin-bottom: 51px;
 }
 .profile_search_input  /deep/  .el-input__inner{
    border-radius: 10px 0px 0px 10px;
-  
 }
 .profile_search_input  /deep/ .el-input-group__append {
 	border: 0;
      background-color: #494DC2;
     border-radius: 0px 10px 10px 0px;
-	color: #FFFFFF;
+	color: white;
 }
 .profile_search_input  /deep/  .el-button{
   bottom: 0;
    border:none;
    outline: none;
+}
+.profile_search_input  /deep/ .el-input-group__append :hover{
+  border: 0;
+   background-color: #CBBEE9;
+  border-radius: 0px 10px 10px 0px;
+  color:  white;
 }
 .profile_select{
 

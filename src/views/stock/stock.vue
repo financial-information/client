@@ -2,44 +2,44 @@
   <div id="stock">
   	<div class="stock_box">
   		<div class="stock_box_head">
-  			企业信息-{{stock}}
+  			企业信息-{{names}}
   		</div>
   		<div class="stock_box_router">
   			<el-row>
   				<i class="el-icon-location" @click="$router.back(-1)"></i>
   				<span @click="back()">返回</span>
   				<i class="el-icon-d-arrow-right"></i>
-  				<span>{{stock}}</span>
+  				<span>{{names}}</span>
   			</el-row>
   		</div>
   		<div class="stock_box_banner" >
-  			<div class="stock_box_main">
+  			<div class="stock_box_main" >
   				<el-container>
                     <el-aside width="210px"><img src="~@/assets/img/common/logo.png" style="width: 210px;"></el-aside>
                     <el-container>
                         <el-header >
                              <el-row>
-                             	<span class="stock_info_name">{{stock}}</span>
+                              <span class="stock_info_name">{{companyinfo.stock_name}}</span>
                              	<i class="el-icon-phone"></i>
-  				                 <span>电话</span>
-  				                 <i class="el-icon-message"></i>
-  				                 <span>邮箱</span>
+                           <span >电话：{{companyinfo.phone}}</span>
+                             
                              </el-row>
                              <el-row>
-                             	 <a v-bind:href="'http://'+info[0].website">{{info[0].website}}</a>
+                              <el-col><a v-bind:href="'http://'+companyinfo.website">{{companyinfo.website}}</a></el-col>
+                             	 
                              </el-row>
                         </el-header>
                         <el-main>
                         	 <el-row>
-                             	<el-col :span="12"><div>成立时间：{{info[0].found_date}}</div></el-col>
-                                 <el-col :span="12"><div>法人代表：{{info[0].legal_representative}}</div></el-col>
+                             	<el-col :span="12"><div>成立时间：{{companyinfo.found_date}}</div></el-col>
+                                 <el-col :span="12"><div>法人代表：{{companyinfo.legal_representative}}</div></el-col>
                              </el-row>
                              <el-row>
-                             	 <el-col :span="12"><div >注册地：{{info[0].registered_address}}</div></el-col>
-                                 <el-col :span="12"><div >主营业务：{{info[0].business_scope}}</div></el-col>
+                             	 <el-col :span="12"><div >注册地：{{companyinfo.registered_address}}</div></el-col>
+                                 <el-col :span="12"><div >主营业务：{{companyinfo.business_scope}}</div></el-col>
                              </el-row>
                               <el-row>
-                             	 <el-col :span="12"><div>所属行业：{{info[0].found_date}}</div></el-col>
+                             	 <el-col :span="12"><div>所属行业：{{companyinfo.industry_type}}</div></el-col>
                              </el-row>
 
                         </el-main>
@@ -53,18 +53,18 @@
 					  	<div class="stock_info_total_11"><span >股票数据</span></div>
 					  	
 					  </el-aside>
-					  <el-main>
-					         <el-row  id="stock_info_total_21">
-                             	<el-col :span="12"><div>股票代码：{{info[0].stock_code}}</div></el-col>
-                                 <el-col :span="12"><div>A股总资本：{{info[0].legal_representative}}</div></el-col>
+					  <el-main class="stock_info_total_2">
+					         <el-row  id="stock_info_total_21"  style="margin-top: 8px;">
+                             	<el-col :span="12"><div>股票代码：{{info.stock_code}}</div></el-col>
+                                 <el-col :span="12"><div>A股总资本：{{info.total_share_capital}}</div></el-col>
                              </el-row>
                              <el-row id="stock_info_total_21">
-                             	 <el-col :span="12"><div>A股简称：{{info[0].registered_address}}</div></el-col>
-                                 <el-col :span="12"><div>A股流通资本：{{info[0].business_scope}}</div></el-col>
+                             	 <el-col :span="12"><div>A股简称：{{info.stock_name}}</div></el-col>
+                                 <el-col :span="12"><div>A股流通资本：{{info.total_share_capital}}</div></el-col>
                              </el-row>
                              <el-row id="stock_info_total_22">
-                             	 <el-col :span="20"><div>A股上市日期：{{info[0].registered_address}}</div></el-col>
-                                 <el-col :span="4" ><div style="font-size: 15px;color: #484CBF;position: absolute;bottom: 0;">查看更多详情<i class="el-icon-arrow-right"></i></div></el-col>
+                             	 <el-col :span="19"><div>A股上市日期：{{companyinfo.found_date}}</div></el-col>
+                                 <el-col :span="5" ><div style="font-size: 15px;color: #484CBF;position: absolute;bottom: 0;">查看更多详情<i class="el-icon-arrow-right"></i></div></el-col>
                              </el-row>
                        </el-main>
 					</el-container>
@@ -74,9 +74,9 @@
 					  <el-aside class="stock_info_today_1">
 					  	<div class="stock_info_today_11"><span >17.89</span></div>
 					  </el-aside>
-					  <el-main>
+					  <el-main class="stock_info_today_2">
 					  	<div style="margin-top: 9px;">
-					  	     <el-row  id="stock_info_today_21">
+					  	     <el-row  id="stock_info_today_21" style="margin-top: 5px;">
                              	<el-col :span="8"><div>成交量（万手）100.78</div></el-col>
                                  <el-col :span="5"><div>涨跌 -0.02</div></el-col>
                                  <el-col :span="5"><div>今开 17.75</div></el-col>
@@ -96,7 +96,7 @@
   		    		<el-row >
 					  		<el-col :span="3" ><span @click="selectType = 'minute'" v-bind:class="[beforeClass ,selectType==='minute' ? affterClass : '']" >分时</span></el-col>
                             <el-col :span="3" ><span  @click="selectType = 'day'" v-bind:class="[beforeClass ,selectType==='day' ? affterClass : '']" >日线</span></el-col>
-                            <el-col :span="3" ><span  @click="selectType = 'week'" v-bind:class="[beforeClass ,selectType==='week' ? affterClass : '']" >仙仙</span></el-col>
+                            <el-col :span="3" ><span  @click="selectType = 'week'" v-bind:class="[beforeClass ,selectType==='week' ? affterClass : '']" >周线</span></el-col>
                             <el-col :span="3" ><span  @click="selectType = 'month'" v-bind:class="[beforeClass ,selectType==='month' ? affterClass : '']" >月线</span></el-col>				  	
                         </el-row>
                         <div class="stock_detailed_echarts">
@@ -104,7 +104,7 @@
                          		<img src="http://image.sinajs.cn/newchart/min/n/sh000001.gif" style="height: 100%;">
                          	</div>
                          	<div id="detaliedDayEcharts"  v-if="this.selectType==='day'">
-                         		<dayecharts></dayecharts>
+                         		<!-- <dayecharts></dayecharts> -->
                          		日线图
                          	</div>
                          	<div id="detaliedWeekEcharts"  v-if="this.selectType==='week'">
@@ -164,13 +164,34 @@
                          		盈利能力图表    		
                          	</div>
                          	<div id="detalied111"  v-if="this.detailed===11 &&this.todatas===true">
-                         		盈利能力数据    		
+                         		盈利能力数据 
+                            <el-table :data="ProfitabilityTableData" border>
+                              
+                                <el-table-column label="指标名称"prop="name"></el-table-column>
+                                <el-table-column label="2016" prop=data[0]> </el-table-column>
+                                <el-table-column label="2017" prop="data[1]"> </el-table-column>
+                                <el-table-column  label="2018" prop="data[2]"> </el-table-column>
+                                <el-table-column label="2019"  prop="data[3]">  </el-table-column>
+                                <el-table-column label="2020" prop="data[4]"> </el-table-column>
+                               
+                            </el-table>   		
                          	</div>
                          	<div id="detalied120"  v-if="this.detailed===12 &&this.todatas===false">
                          		偿还能力图表    		
                          	</div>
                          	<div id="detalied121"  v-if="this.detailed===12 &&this.todatas===true">
-                         		偿还能力数据    		
+                            
+                         		偿还能力数据   
+                            <el-table :data="SolwencyTableData" border>
+                              
+                                <el-table-column label="指标名称"prop="name"></el-table-column>
+                                <el-table-column label="2016" prop=data[0]> </el-table-column>
+                                <el-table-column label="2017" prop="data[1]"> </el-table-column>
+                                <el-table-column  label="2018" prop="data[2]"> </el-table-column>
+                                <el-table-column label="2019"  prop="data[3]">  </el-table-column>
+                                <el-table-column label="2020" prop="data[4]"> </el-table-column>
+                               
+                            </el-table>        		
                          	</div>
                          	<div id="detalied130"  v-if="this.detailed===13 &&this.todatas===false">
                          		运营能力图表    		
@@ -197,39 +218,24 @@
 
 <script>
 	import Footers from "@/components/content/Footer"
-	import  Dayecharts from "./childCops/Dayecharts.vue"
-  import { getCompanyBasicData } from '@/network/tyy'
+	// import  Dayecharts from "./childCops/Dayecharts.vue"
+  import { searchCompanyFinanceData } from "@/network/tyy"
+  import { searchCompanyOneData } from "@/network/tyy"
 export default {
 
   name: 'Stock',
   components:{
           Footers,
-          Dayecharts
+          // Dayecharts
   },
 
   data () {
     return {
     	stock:'',
-    	info:[
-            {
-             stock_code: "600000.SH",
-			 stock_name: "浦发银行",
-			credit_code: "9131000013221158XC",
-			company_name: "上海浦东发展银行股份有限公司",
-			found_date: "1992-10-19",
-			business_code: "310000000013047",
-			registered_capital: "29352134127.0",
-			legal_representative: "郑杨",
-			phone: "86-21-63611226",
-			registered_address: "上海市黄浦区中山东一路12号",
-			website: "www.spdb.com.cn",
-			profile: "　　上海浦东发展银行股份有限公司是一家全国性股份制商业银行,主营业务是提供银行及相关金融服务；主要产品为大客户经营业务、对公存贷款业务、投资银行业务、交易银行业务、国际业务平台业务、个人客户与存款业务、消费及小微金融业务、个人理财业务、借记卡及支付结算业务、信用卡业务、私人银行业务、投资交易业务、金融机构业务、资产管理业务、资产托管业务；公司荣誉有美国《福布斯》杂志被评为“全球企业2000强”排名榜单第70位，居上榜中资企业第13位、中资银行第9位；被英国《银行家》杂志评为“全球银行1000强”排名榜单第25位，居上榜中资银行第8位，成本收入比全球第一，2019年度中国网金融扶贫先锋榜评选“金融扶贫先锋机构”。",
-			stock_type: "11100000000000000001",
-			business_scope: "提供银行及相关金融服务",
-			listed: "0",
-			deteled: "0"
-            }
-    	],
+    	info:[],
+      companyinfo:[],
+      code:'',
+      names:'',
     	activeNames: ['0'],
     	detailed: 0,
     	activeClass: 'classAffter',
@@ -237,19 +243,19 @@ export default {
         beforeClass:'classFirst',
         affterClass:'classFinall',
     	todatas: false,
-    	selectType: 'day'
+    	selectType: 'day',
+      ProfitabilityTableData: [{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]}],
+      SolwencyTableData: [{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]}]
         }
   },
   created(){
-  	this.stock = this.$route.query.Shares
+    
   },
   mounted() {
-    let data = {
-      "id": 1
-    }
-    getCompanyBasicData(data).then(res => {
-      console.log(res)
-    })
+    this.code=this.$route.query.code
+    this.names=this.$route.query.name
+    this.getCompanyFinanceData()
+    this.searchCompanyData()
   },
   methods:{
   	handleChange(val) {
@@ -259,9 +265,65 @@ export default {
         console.log(tab, event);
       },
       back(){
+        if(this.$route.query.find==0)
         this.$router.push({path:"/prosearch",query:{value0:this.$route.query.value0,value1:this.$route.query.value1,value2
             :this.$route.query.value2,value3:this.$route.query.value3,value4:this.$route.query.value4}})
+      else{
+        this.$router.back({path:"/profile"})
       }
+      },
+      getCompanyFinanceData(){
+        let data = this.code
+        console.log(data)
+        searchCompanyFinanceData(data).then(res => {
+           if(res.results == null || res.results == undefined) {
+             console.log(res)
+           } else  {
+            console.log(res)
+          
+          this.info = res.results[0]
+          console.log('ltljl')
+          console.log(this.info)
+          // 盈利能力
+            this.ProfitabilityTableData[0].name="净资产收益率（%）"
+            this.ProfitabilityTableData[0].data=this.info.roe.split(';')
+            this.ProfitabilityTableData[1].name="总资产净利率ROA(%)"
+            this.ProfitabilityTableData[1].data=this.info.roa.split(';')
+            this.ProfitabilityTableData[2].name="销售净利率(%)"
+            this.ProfitabilityTableData[2].data=this.info.sale_net_profit.split(';')
+// 流动比率
+            this.SolwencyTableData[0].name="流动比率（%）"
+            this.SolwencyTableData[0].data=this.info.current_ratio.split(';')
+            this.SolwencyTableData[1].name="速动比率(%)"
+            this.SolwencyTableData[1].data=this.info.quick_ratio.split(';')
+            this.SolwencyTableData[2].name="资产负债率(%)"
+            this.SolwencyTableData[2].data=this.info.asset_liability_ratio.split(';')
+            console.log(this.SolwencyTableData)
+            console.log(res.results[0])
+          }
+        
+      })
+    },
+    searchCompanyData() {
+
+           let data=this.names
+      console.log(data)
+      searchCompanyOneData(data).then(res => {
+        if(res.results == null || res.results == undefined) {
+
+        } else  {
+          console.log(res)
+        for(let i = 0; i < res.results.length; i++) {
+          res.results[i].url = require('@/assets/img/home/豆腐的.jpg')
+        }
+        console.log(res.results)
+        console.log('xjj')
+        this.companyinfo = res.results[0]
+        console.log(this.companyinfo)
+        }
+        
+      })
+       }
     }
 }
 </script>
@@ -270,6 +332,7 @@ export default {
 #stock{
 	
 	background: url("~@/assets/img/home/company_info_background.png") #F3F8FF no-repeat center top;
+  min-width: 1260px;
    
 }
 .stock_box{
@@ -280,12 +343,12 @@ export default {
 .stock_box_head{
 	padding-top: 51px;
 	height: 107px;
-	font-size: 81px;
+	font-size: 3em;
 	color: white;
 }
 .stock_box_router{
 	padding-top: 25px;
-	font-size: 32px;
+	font-size: 1em;
 	color: white;
 }
 .stock_box_banner{
@@ -298,6 +361,9 @@ export default {
 }
 .stock_box_main{
 	margin-bottom: 20px;
+}
+.stock_box_main div{
+  padding: 1px;
 }
 .el-header {
     height: 105px !important;
@@ -324,6 +390,14 @@ a{
 	padding-left: 20px;
 	padding-right: 20px;
 
+}
+.stock_info_total_2 {
+  height: 100px !important;
+  padding: 0px;
+  padding-left: 10px;
+}
+.stock_info_total_2 div{
+  padding: 1px;
 }
 .stock_info_total{
 	height: 100px;
@@ -379,6 +453,14 @@ border: 2px solid #E4D8C0;
 	justify-content: center;
 	border-right: 1px solid #E3E3E3;
 }
+.stock_info_today_2{
+    height: 100px !important;
+    padding: 0px;
+    padding-left: 20px;
+}
+.stock_info_today_2 div{
+    padding: 2px;
+}
 .stock_info_today_21{
 	width: 100%;
 }
@@ -394,6 +476,7 @@ border: 2px solid #E4D8C0;
 	width: 100%;
 	border: 2px solid purple;
 }
+
 /*
 .el-collapse-item{
      margin-left: 30px;

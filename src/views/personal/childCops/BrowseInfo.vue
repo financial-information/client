@@ -37,6 +37,7 @@
 		data(){
 			return{
     	objectresult:[
+    	
     	],
     	  phone: '19975372577'
 			}
@@ -60,8 +61,6 @@
 	       		console.log(res)
 	       		this.objectresult=res.results
 	            })
-
-
        }
 		}
 	}

@@ -52,6 +52,7 @@ export default {
 	width: 80%;
 	margin-left:10%;
 	margin-bottom: 0px;
+	min-width: 960px;
 }
 .home_banner_box{
 

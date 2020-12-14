@@ -107,6 +107,7 @@ export default {
 <style lang="css" scoped>
 #home{
   background-color: #FDFDFD;
+  min-width: 960px;
 }
 </style> 
 

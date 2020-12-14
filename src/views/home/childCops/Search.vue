@@ -57,11 +57,13 @@ export default {
 }
 </script>
 
+
 <style lang="css" scoped>
 .search{
   background-image: url("~@/assets/img/home/search_background.png");
   background-repeat: no-repeat;
   background-size:cover;
+  min-width: 960px;
 }
 .search-input{
     width:  70%;
@@ -80,6 +82,7 @@ export default {
 .input-with-select{/*
   border-radius: 20px;
   border:2px solid purple;*/
+ 
 }
 .search-input  /deep/  .el-input__inner{
    border-radius: 20px 0px 0px 20px;
@@ -94,7 +97,7 @@ export default {
   bottom: 0;
    border:none;
    outline: none;
-  
+   color: white;
   
 }
 .active1{

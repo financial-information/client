@@ -68,7 +68,10 @@ const News = () => import('@/views/news/News')
 const App = () => import('@/views/app/App')
 
 
-
+/*
+  personalinfo
+*/
+const Person = () => import('@/views/personal/Person')
 
 
 /*
@@ -153,6 +156,10 @@ const routes =  [
     {
       path: '/searchresult',
       component: Searchresult
+    },
+    {
+      path: '/person',
+      component: Person
     }
   ]
 export default new Router({

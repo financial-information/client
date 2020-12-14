@@ -45,10 +45,10 @@
           </el-image>
         </div>
 
-        <div class="user_img">
+        <div class="user_img" @click="goPersonData()">
           <el-image
           class="user_image"
-          :src="userImg">
+          :src="userImg" >
             
           </el-image>
         </div>
@@ -170,7 +170,7 @@ export default {
           },
           {
             text: "新闻",
-            path: "/news"
+            path: "/new"
           },
           {
             text: "应用",
@@ -287,6 +287,9 @@ export default {
     // 跳转到管理后台
     manage_page() {
       this.$router.push('/manage')
+    },
+    goPersonData(){
+      this.$router.push('/person')
     }
   }
 }

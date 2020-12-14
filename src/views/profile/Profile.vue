@@ -3,10 +3,9 @@
 
      <searchinput  @searchvalue="getsearchvalue" ></searchinput>
 
-    <searchrecommend v-if="!showout"></searchrecommend>
+    <searchrecommend ></searchrecommend>
     <searchresult v-if="showout"></searchresult>
 
-   
 </div>
 </template>
 
@@ -14,6 +13,7 @@
     import Searchinput from "./childCops/SearchInput.vue"
     import Searchrecommend from "./childCops/SearchRecommend.vue"
     import Searchresult from "./childCops/SearchResult.vue"
+    
      export default {
 
       name: 'Profile',
@@ -23,7 +23,9 @@
 	    Searchresult
   },
   data () {
+
     return {
+
     	value0:'',
 	    	// searchvalue
 	    	searchvalue0:'',
@@ -38,7 +40,6 @@
     }
   },
   created(){
-
   },
   mouted(){
       
@@ -80,6 +81,7 @@
 <style lang="css" scoped>
 #profile{
 	background: url("~@/assets/img/home/company_info_background.png") #F3F8FF no-repeat center top;
-}
+   min-width: 1260px;
+ }
 /*searchinput*/
 </style>
