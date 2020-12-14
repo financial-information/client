@@ -14,6 +14,7 @@ export function getCompanyBasicDataByPage(config) {
     url: '/company_database/company_basic_data/?page=' + config.page,
   })
 }
+
 // 企业财务信息
 
 export function getCompanyFinanceData(config) {
@@ -25,6 +26,28 @@ export function getCompanyFinanceData(config) {
 export function getCompanyFinanceDataByPage(config) {
   return request({
     url: '/company_database/company_finance_data/?page=' + config.page,
+  })
+}
+
+
+// 获取上证指数种类
+export function getXSHGExponentType(config) {
+  return request({
+    url: '/active_data/getXSHGExponentType/'
+  })
+}
+// 获取深证指数种类
+export function getXSHEExponentType(config) {
+  return request({
+    url: '/active_data/getXSHEExponentType/'
+  })
+}
+
+// 获取指数的各类数据
+export function getExponentData(config) {
+  return requestPost({
+    url: "active_data/getExponentDataByCode/",
+    params: qs.stringify(config)
   })
 }
 
