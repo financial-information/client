@@ -169,14 +169,6 @@ export default {
             path: "/profile"
           },
           {
-            text: "新闻",
-            path: "/new"
-          },
-          {
-            text: "应用",
-            path: "/app"
-          },
-          {
             text: "关于我们",
             path: "/about"
           },

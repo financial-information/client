@@ -87,7 +87,7 @@
 
   </el-aside>
   <el-main  style="width:35%;">
-     <el-tabs v-model="activeName" @tab-click="handleClick">
+     <el-tabs v-model="activeName2" @tab-click="handleClick2">
     <el-tab-pane label="市场总览" name="first">
       <div>
         <p>截止到：</p>
@@ -121,6 +121,7 @@ export default {
                 name: "网站"
             },
             activeName: 'one', 
+            activeName2: 'first',
             mainType: [
             {
                 label: '上海市场指数列表',
@@ -245,6 +246,9 @@ export default {
             setTimeout(function() {
                 fun(name, fun_data, fun_time)
             }, 0)
+        },
+        handleClick2(tab) {
+            console.log(tab)
         },
         /******
             获取数据
