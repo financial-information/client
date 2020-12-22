@@ -132,7 +132,7 @@ export default {
     methods: {
       getUserInfo(){
           let data={
-            "id" : 5
+            "phone" : this.$store.getters.getUserName,
           }
           getUserInfoData(data).then(res=>{
               if(res!=null&&res != undefined){
@@ -142,7 +142,7 @@ export default {
       },
       updateUserInfo(data1) {
           let data={
-            "id" : '5',
+            "id" : this.ruleForm.id,
             "params": data1 
           }
           updateUserInfoData(data).then(res=>{

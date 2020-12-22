@@ -33,49 +33,47 @@
 </template>
 
 <script >
-	export default{
-		name:'Noticeinfo',
-		data(){
-			return{
-    	objectresult:[
-    	{
-    		url: require('@/assets/img/home/豆腐的.jpg'),
-    		stock_name:'浦发银行'
-    	},
-    	{
-    		url:require('@/assets/img/home/豆腐的.jpg'),
-    		stock_name:'平安银行'
-    	},{
-    		url:require('@/assets/img/home/豆腐的.jpg'),
-    		stock_name:'建设银行'
-    	},{
-    		url:require('@/assets/img/home/豆腐的.jpg'),
-    		stock_name:'农业银行'
-    	}
-    	]
-			}
-		},
-		methods:{
-			goProDetailed(data){
-       	this.$router.push({path:"/stock",query:{ Shares: data}})
-       }
+export default{
+	name:'Noticeinfo',
+	data(){
+		return{
+			objectresult:[
+			{
+				url: require('@/assets/img/home/豆腐的.jpg'),
+				stock_name:'浦发银行'
+			},
+			{
+				url:require('@/assets/img/home/豆腐的.jpg'),
+				stock_name:'平安银行'
+			},{
+				url:require('@/assets/img/home/豆腐的.jpg'),
+				stock_name:'建设银行'
+			},{
+				url:require('@/assets/img/home/豆腐的.jpg'),
+				stock_name:'农业银行'
+			}]
 		}
+	},
+	methods:{
+		goProDetailed(data){
+	       	this.$router.push({path:"/stock",query:{ Shares: data}})
+	    }
 	}
+}
 </script>
 
 <style lang="css" scoped>
 .notice_body{
-	width: 90%;
+	width: 75%;
 	margin-left: 5%;
 }
 .noticeCards{
-height: 134px;
+    height: 134px;
 	background: white;
 	padding-top: 10px ;
-
-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.16);
-opacity: 1;
-border-radius: 14px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.16);
+	opacity: 1;
+	border-radius: 14px;
 }
 .el-container{
 	padding: 0px;

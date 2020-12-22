@@ -99,7 +99,7 @@ export function getHotData(data) {
 
 export function getUserInfoData(data) {
   return request({
-    url: '/users/user_info/'+ data.id +  '/'
+    url: '/users/user_info/?user_phone='+data.phone
   })
 }
 

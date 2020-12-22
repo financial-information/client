@@ -332,13 +332,13 @@
               } 
               else 
               {
-                console.log(res)
+              //  console.log(res)
                 if(page==1)
                      this.$message.success("搜索成功")
               for(let i = 0; i < res.results.length; i++) {
                 res.results[i].url = require('@/assets/img/home/查.jpg')
               }
-              console.log(res.results)
+             // console.log(res.results)
               this.objectresult = res.results
               this.num=res.count
               }
@@ -358,13 +358,13 @@
       },
       goProDetailed(data1,data2,data3){
           let data={
-            'user_phone': "19975372577",
+            'user_phone': this.$store.getters.getUserName,
             'history_id': data3,
             'history_type': 1 
           }
           addHistoryCompanyBasicData(data).then(res=>{
-              if(res!=null&&res != undefined)
-                 console.log('成功过')
+              //if(res!=null&&res != undefined)
+                // console.log('成功过')
           })
           this.$router.push({path:"/stock",query:{ code: data1,name:data2,value0:this.value0,value1:this.value1,value2:this.value2,value3:this.value3,value4:this.value4,find:0}})
        },
@@ -386,7 +386,7 @@
   width: 80%;
   height: 289px;
   margin-left: 10%;
-    padding-top: 36px;
+  padding-top: 36px;
 
 }
 .profile_search_head{

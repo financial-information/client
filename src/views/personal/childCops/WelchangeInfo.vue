@@ -11,20 +11,18 @@
 	</el-container>
 </template>
 <script >
-	export default{
-		name:'Welchangeinfo',
-		data(){
-			return{
+export default{
+	name:'Welchangeinfo',
+	data(){
+		return{
 
-			}
 		}
 	}
+}
 </script>
 
 <style scoped>
-
 .el-main{
-
 font-size: 59px;
 font-family: Microsoft YaHei;
 font-weight: bold;
@@ -32,5 +30,4 @@ line-height: 77px;
 color: #000000;
 opacity: 1;
 }
-	
 </style>

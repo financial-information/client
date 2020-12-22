@@ -76,7 +76,7 @@ export default{
      getHistoryData(){
        	let that=this
          	let data={
-             "phone": that.phone,
+             "phone": this.$store.getters.getUserName,
              "deleted": '0',
              "limit": '50'
          	}

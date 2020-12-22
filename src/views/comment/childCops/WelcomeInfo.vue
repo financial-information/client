@@ -28,7 +28,7 @@ export default{
 	methods:{
 		getUserInfo(){
 		    let data={
-		      "id" : 5
+		     "phone" : this.$store.getters.getUserName,
 		    }
 	        getUserInfoData(data).then(res=>{
 		        if(res!=null&&res != undefined)

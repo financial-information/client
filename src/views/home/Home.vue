@@ -12,8 +12,6 @@
       <!-- 热点 -->
       <New></New>
       
-      <hr>
-      <footers></footers> 
   </div>
 </template>
 <script>

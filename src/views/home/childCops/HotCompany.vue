@@ -109,8 +109,8 @@ export default{
            {
             //
             this.doc=res.data
-            //调用函数
-            console.log(this.doc)
+            // //调用函数
+            // console.log(this.doc)
             this.getCompanyId(this.doc[this.f_flag].history_module_id)
            }
                  
@@ -118,16 +118,15 @@ export default{
       },
       goProDetailed(data1,data2,data3){
           let data={
-            'user_phone': "19975372577",
+            'user_phone': this.$store.getters.getUserName,
             'history_id': data3,
             'history_type':1
           }
-          console.log(data)
+          // console.log(data)
            addHistoryCompanyBasicData(data).then(res=>{
               if(res!=null&&res != undefined)
-                 console.log('成功过')
+                 console.log("chengg")
            })
-          console.log(data1)
           this.$router.push({path:"/stock",query:{ code: data1, name: data2}})
       },
       goProfile(){

@@ -299,13 +299,10 @@ export default {
           console.log(data)
           searchCompanyFinanceData(data).then(res => {
              if(res.results == null || res.results == undefined) {
-               console.log(res)
-             } else  {
-              console.log(res)
-            
+             } 
+             else  
+             {
             this.info = res.results[0]
-            console.log('ltljl')
-            console.log(this.info)
             // 盈利能力
               this.ProfitabilityTableData[0].name="净资产收益率（%）"
               this.ProfitabilityTableData[0].data=this.info.roe.split(';')
@@ -343,7 +340,7 @@ export default {
       },
       isCollection(data1,data2){
          let data={
-            'phone': "19975372577",
+            'phone': this.$store.getters.getUserName,
             'collection_module_id': data1,
             'collection_module_type': data2,
             'deleted': '0'
@@ -361,7 +358,7 @@ export default {
       },
       addCollectionData(data1,data2){
           let data={
-            'user_phone': "19975372577",
+            'user_phone': this.$store.getters.getUserName,
             'collection_id': data1,
             'collection_type':data2
           }
@@ -388,7 +385,6 @@ export default {
           })
 
       }
-
     }
 }
 </script>

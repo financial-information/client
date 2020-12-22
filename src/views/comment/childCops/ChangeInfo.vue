@@ -2,39 +2,33 @@
 <div class="change_body">
 
      <el-row  v-if="showChange==false">
-      <div class="clickChange" ><el-button type="primary" icon="el-icon-edit" @click="showChange=true" plain>编辑/完善资料</el-button></div></el-row>
-      <el-form  v-if="showChange==false" label-position=top :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="80px" class="demo-ruleForm"  :disabled=true>
-      <el-form-item label="名称" >
-          <el-input v-model="ruleForm.username"></el-input>
-        </el-form-item>
-
-      <el-form-item label="电话" prop="phone" >
-          <el-input v-model="ruleForm.phone"></el-input>
-      </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-            <el-input v-model="ruleForm.email" placeholder="未设置"></el-input>
-          </el-form-item>
-      <el-row>
-
-        <el-col :span="12">
-            <el-form-item label="生日"  class="birthday" prop="birthday" placeholder="未设置">
-               <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.birthday" style="width: 100%;"></el-date-picker>
-            </el-form-item>
-        </el-col>
-        
-        <el-col :span="12">
-          <el-form-item label="性别"  class="gender" prop="gender" placeholder="未设置">
-              <el-input v-model="showgender[ruleForm.gender]" placeholder="未设置"></el-input>
-            </el-form-item>
-        </el-col>
-         
-      </el-row>
-
-        <el-form-item label="地址" >
-            <el-input v-model="ruleForm.address" placeholder="未设置"></el-input>
-          </el-form-item>
-
-      </el-form>
+         <div class="clickChange" ><el-button type="primary" icon="el-icon-edit" @click="showChange=true" plain>编辑/完善资料</el-button></div></el-row>
+         <el-form  v-if="showChange==false" label-position=top :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="80px" class="demo-ruleForm"  :disabled=true>
+              <el-form-item label="名称" >
+                  <el-input v-model="ruleForm.username"></el-input>
+              </el-form-item>
+              <el-form-item label="电话" prop="phone" >
+                  <el-input v-model="ruleForm.phone"></el-input>
+              </el-form-item>
+              <el-form-item label="邮箱" prop="email">
+                  <el-input v-model="ruleForm.email" placeholder="未设置"></el-input>
+              </el-form-item>
+              <el-row>
+                <el-col :span="12">
+                    <el-form-item label="生日"  class="birthday" prop="birthday" placeholder="未设置">
+                       <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.birthday" style="width: 100%;"></el-date-picker>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                  <el-form-item label="性别"  class="gender" prop="gender" placeholder="未设置">
+                      <el-input v-model="showgender[ruleForm.gender]" placeholder="未设置"></el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-form-item label="地址" >
+                  <el-input v-model="ruleForm.address" placeholder="未设置"></el-input>
+              </el-form-item>
+          </el-form>
 
 
 

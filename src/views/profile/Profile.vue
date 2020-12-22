@@ -82,6 +82,8 @@
 #profile{
 	background: url("~@/assets/img/home/company_info_background.png") #F3F8FF no-repeat center top;
    min-width: 1260px;
+   min-height: 1000px;
+   padding-bottom: 20px;
  }
 /*searchinput*/
 </style>

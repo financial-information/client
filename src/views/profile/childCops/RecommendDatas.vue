@@ -64,12 +64,12 @@ export default {
       let data = {
         "page": 1
       }
-      console.log('111')
+      //console.log('111')
       getCompanyBasicDataByPage(data).then(res => {
         if(res.results == null || res.results == undefined) {
-             console.log('kkk')
+             //console.log('kkk')
         } else {
-            console.log(res)
+           // console.log(res)
             for(let i = 0; i < res.results.length; i++) {
                   res.results[i].url = require('@/assets/img/home/search_background.png')
             }
@@ -88,7 +88,6 @@ export default {
         for(let i = 0; i < res.results.length; i++) {
           res.results[i].url = require('@/assets/img/home/search_background.png')
         }
-        console.log(res)
         this.recommendData = res.results
       })
     },
@@ -100,14 +99,14 @@ export default {
     },
     goProDetailed(data1,data2,data3){
         let data={
-          'user_phone': "19975372577",
+          'user_phone': this.$store.getters.getUserName,
           'history_id': data3,
           'history_type':1
         }
-        console.log(data)
+        //console.log(data)
         addHistoryCompanyBasicData(data).then(res=>{
-            if(res!=null&&res != undefined)
-               console.log('成功过')
+            //if(res!=null&&res != undefined)
+              // console.log('成功过')
          })
         console.log(data1)
         this.$router.push({path:"/stock",query:{ code: data1, name: data2}})

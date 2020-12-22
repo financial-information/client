@@ -1,6 +1,6 @@
 <template>
 	
-		<el-footer>
+		<el-footer style="padding: 0px;">
 			<hr>
   <div class="center" style="text-align: center;"><span style="font-family:arial;">Copyright &copy;qimingxing</span></div></el-footer>
 
@@ -20,5 +20,4 @@
 
 
 <style lang="css" scoped>
-	
 </style>

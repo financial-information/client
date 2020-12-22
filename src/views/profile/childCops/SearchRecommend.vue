@@ -1,6 +1,6 @@
 <template>
 <div class="profile_cards" >
-  
+  <div class="body">
     	<div class="profile_cards_head">
           <el-row >
       			  <el-col :span="6" ><div class="bg-purple"><i class="el-icon-sunny"></i>热门企业</div></el-col>
@@ -50,6 +50,7 @@
         
     	</div>
       <recommenddatas v-show="showmore"></recommenddatas>
+      </div>
     </div>
 
 
@@ -98,7 +99,7 @@ export default{
          getCompanyId(id) {
           getCompanyId(id).then(re=>{
                    
-                  console.log(re.results[0])
+               //   console.log(re.results[0])
                   re.results[0].url = require('@/assets/img/home/search_background.png')
                    this.objecttop.push(JSON.parse(JSON.stringify(re.results[0])))
                   this.f_flag++
@@ -130,16 +131,15 @@ export default{
         },
        goProDetailed(data1,data2,data3){
             let data={
-              'user_phone': "19975372577",
+              'user_phone': this.$store.getters.getUserName,
               'history_id': data3,
               'history_type':1
             }
-            console.log(data)
+           // console.log(data)
              addHistoryCompanyBasicData(data).then(res=>{
-                if(res!=null&&res != undefined)
-                   console.log('成功过')
+                   //console.log('成功过')
              })
-            console.log(data1)
+            //console.log(data1)
             this.$router.push({path:"/stock",query:{ code: data1, name: data2}})
         }
 		}
@@ -153,8 +153,8 @@ export default{
   	margin-right: 10%;
   	background: white;
   	padding-top: 44px ;
-	
-
+    padding-bottom: 20px;
+    opacity: 1;
 }
 .profile_cards_head{
   	margin-right: 75px;
