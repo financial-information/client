@@ -170,7 +170,7 @@ export default {
           },
           {
             text: "新闻",
-            path: "/comment"
+            path: "/new"
           },
           {
             text: "应用",
