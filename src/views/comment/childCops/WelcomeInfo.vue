@@ -5,35 +5,52 @@
 		</el-aside>
 		<el-main style="">
 			<el-row >
-				<span>启明星</span>
+				<span>{{ruleForm.username}}</span>
 			</el-row>
 			<el-row >
 				<span>欢迎回来</span>
-             </el-row>
+            </el-row>
 		</el-main>
 	</el-container>
 </template>
 <script >
-	export default{
-		name:'Welcomeinfo',
-		data(){
-			return{
-
-			}
+import {getUserInfoData} from "@/network/tyy"
+export default{
+	name:'Welcomeinfo',
+	data(){
+		return{
+        ruleForm:[]
 		}
+	},
+    mounted(){
+      this.getUserInfo()
+    },
+	methods:{
+		getUserInfo(){
+		    let data={
+		      "id" : 5
+		    }
+	        getUserInfoData(data).then(res=>{
+		        if(res!=null&&res != undefined)
+		        {
+		          console.log('成功成功成功') 
+		          console.log(res)
+		          this.ruleForm=res
+		        }      
+		    })
+        }
 	}
+}
 </script>
 
 <style scoped>
 
 .el-main{
-
-font-size: 59px;
+font-size: 50px;
 font-family: Microsoft YaHei;
 font-weight: bold;
 line-height: 77px;
 color: #000000;
 opacity: 1;
 }
-	
 </style>

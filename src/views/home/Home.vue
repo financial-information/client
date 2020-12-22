@@ -5,6 +5,8 @@
       
       <!-- 指标信息 -->
       <information></information>
+      <!-- 热点企业 -->
+      <hotcompany></hotcompany>
       <!-- 用户入口 -->
       <userbar></userbar>
       <!-- 热点 -->
@@ -20,12 +22,15 @@ import Search from "./childCops/Search.vue"
 import New  from "./childCops/New.vue"
 import Userbar  from "./childCops/UserBar.vue"
 import  Information from "./childCops/Information.vue"
+import Hotcompany from "./childCops/HotCompany.vue"
 import Footers from "./childCops/Footer.vue"
+import Searchrecommend from "../profile/childCops/SearchRecommend.vue"
 export default {
   name: 'Home',
   components:{
     Search,
     New,
+    Hotcompany,
     Userbar,
     Information,
      Footers
@@ -48,6 +53,6 @@ export default {
 <style lang="css" scoped>
 #home{
   background-color: #FDFDFD;
-  min-width: 960px;
+  min-width: 1260px;
 }
 </style>

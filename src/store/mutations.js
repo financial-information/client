@@ -25,6 +25,10 @@ const mutations = {
   },
   updateSession(state, data) {
     state.session = data
+  },
+  updateUser(state, data) {
+    state.userName = data.userName
+    state.password = data.password
   }
 }
 

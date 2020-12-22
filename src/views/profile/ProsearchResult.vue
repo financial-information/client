@@ -71,7 +71,7 @@
               <el-main style="width: 75%;">
                 <el-row style="margin-bottom:0px;" >
                   <el-col :span="21" ><div class="bg-purple " id = "sortTags" style="font-size: 1em;" >{{objectresult[n-1].company_name}}</div></el-col>
-                  <el-col :span="3"><div class="grid-content1" style="font-size: 12px;color: #484CBF;opacity: 0.62;" @click="goProDetailed(objectresult[n-1].stock_code,objectresult[n-1].company_name)">查看更多<i class="el-icon-caret-right"></i></div></el-col>
+                  <el-col :span="3"><div class="grid-content1" style="font-size: 12px;color: #484CBF;opacity: 0.62;" @click="goProDetailed(objectresult[n-1].stock_code,objectresult[n-1].company_name,objectresult[n-1].id)">查看更多<i class="el-icon-caret-right"></i></div></el-col>
                 </el-row>
                 <el-row style="font-size: 15px;height: 18px;color: #9A9A9A;margin-bottom: 15px;">{{objectresult[n-1].industry_type}}</el-row>
                 <el-row  id="detailinfo">
@@ -117,7 +117,7 @@
     import Searchresult from "./childCops/SearchResult.vue"
 
 
-    import { searchCompanyData } from "@/network/tyy"
+    import { searchCompanyData ,addHistoryCompanyBasicData} from "@/network/tyy"
 
      export default {
 
@@ -288,25 +288,20 @@
         currentpage:1
 
     }
-  }
-  ,
+  },
   created(){
-
       this.value0 = this.$route.query.value0
       this.value1 = this.$route.query.value1
       this.value2 = this.$route.query.value2
       this.value3 = this.$route.query.value3
       this.value4 = this.$route.query.value4
       this.page =  this.$route.query.page
-      console.log(12313)
   },
   mounted(){
     this.searchCompanyData(this.currentpage)
-
   },
   methods:{
        searchCompanyData(page) {
-
            let data={
               "name":this.value0,
               "type": this.value1,
@@ -317,78 +312,65 @@
               "offset": 0
            }
            data.offset=(page-1)*10
-      if(this.value2=="5千万-5亿"){data.min_price=500000000 ; data.max_price=500000000}
-      if(this.value2=="5亿-50亿"){data.min_price=500000000  ; data.max_price=5000000000}
-      if(this.value2=="50亿-150亿"){data.min_price=5000000000  ; data.max_price=15000000000}
-      if(this.value2=="150亿以上"){data.min_price=15000000000 }
-      if(this.value3=="1949年-1965年"){data.min_time=1949  ; data.max_time=1965}
-      if(this.value3=="1966年-1980年"){data.min_time=1966 ; data.max_time=1980}
-      if(this.value3=="1981年-2000年"){data.min_time=1981  ; data.max_time=2000}
-      if(this.value3=="2001年至今"){data.min_time=2001}
-         if(this.value1=="全部----"){data.type=""}
-      if(this.value2=="全部----"){data.min_price=10000}
-      if(this.value3=="全部----"){data.min_time=1948}
-        this.searchpage=data
-        console.log(9991)
-        console.log(this.searchpage)
-      searchCompanyData(data).then(res => {
-
-        if(res.count==0) {
-          this.$message.error('抱歉,没有找到您想要的企业');
-          this.objectresult = []
-          this.num=0
-        } 
-        else 
-        {
-          console.log(res)
-          if(page==1)
-               this.$message.success("搜索成功")
-        for(let i = 0; i < res.results.length; i++) {
-          res.results[i].url = require('@/assets/img/home/查.jpg')
-        }
-        console.log(res.results)
-        this.objectresult = res.results
-        this.num=res.count
-        }
-        
-      })
+            if(this.value2=="5千万-5亿"){data.min_price=500000000 ; data.max_price=500000000}
+            if(this.value2=="5亿-50亿"){data.min_price=500000000  ; data.max_price=5000000000}
+            if(this.value2=="50亿-150亿"){data.min_price=5000000000  ; data.max_price=15000000000}
+            if(this.value2=="150亿以上"){data.min_price=15000000000 }
+            if(this.value3=="1949年-1965年"){data.min_time=1949  ; data.max_time=1965}
+            if(this.value3=="1966年-1980年"){data.min_time=1966 ; data.max_time=1980}
+            if(this.value3=="1981年-2000年"){data.min_time=1981  ; data.max_time=2000}
+            if(this.value3=="2001年至今"){data.min_time=2001}
+               if(this.value1=="全部----"){data.type=""}
+            if(this.value2=="全部----"){data.min_price=10000}
+            if(this.value3=="全部----"){data.min_time=1948}
+           this.searchpage=data
+          searchCompanyData(data).then(res => {
+              if(res.count==0) {
+                this.$message.error('抱歉,没有找到您想要的企业');
+                this.objectresult = []
+                this.num=0
+              } 
+              else 
+              {
+                console.log(res)
+                if(page==1)
+                     this.$message.success("搜索成功")
+              for(let i = 0; i < res.results.length; i++) {
+                res.results[i].url = require('@/assets/img/home/查.jpg')
+              }
+              console.log(res.results)
+              this.objectresult = res.results
+              this.num=res.count
+              }
+         })
        },
-         goResultPage(){
-         
-         if(this.value0.length+this.value1.length+this.value2.length+this.value3.length+this.value4.length<=0)
+      goResultPage(){
+          if(this.value0.length+this.value1.length+this.value2.length+this.value3.length+this.value4.length<=0)
             this.$message('请确定查询条件')
-        else{
+          else{
               this.searchCompanyData(this.page)
             this.$router.push({path:"/prosearch",query:{ value0:this.value0,value1:this.value1,value2
             :this.value2,value3:this.value3,value4:this.value4}})
-        }
-       },
-        handleCurrentChange(val) {
+          }
+      },
+      handleCurrentChange(val) {
       this.searchCompanyData(val)
-    },
-       goProDetailed(data1,data2){
-            console.log(data1)
-             this.$router.push({path:"/stock",query:{ code: data1,name:data2,value0:this.value0,value1:this.value1,value2
-            :this.value2,value3:this.value3,value4:this.value4,find:0}})
+      },
+      goProDetailed(data1,data2,data3){
+          let data={
+            'user_phone': "19975372577",
+            'history_id': data3,
+            'history_type': 1 
+          }
+          addHistoryCompanyBasicData(data).then(res=>{
+              if(res!=null&&res != undefined)
+                 console.log('成功过')
+          })
+          this.$router.push({path:"/stock",query:{ code: data1,name:data2,value0:this.value0,value1:this.value1,value2:this.value2,value3:this.value3,value4:this.value4,find:0}})
        },
        back(){
         this.$router.push({path:"/profile"})
        }
-
-
-         
-       // },
-       // getsearchvalue(data){
-       // 	this.searchvalue0=data.value0
-       // 	this.searchvalue1=data.value1
-       // 	this.searchvalue2=data.value2
-       // 	this.searchvalue3=data.value3
-       // 	this.searchvalue4=data.value4
-       // 	this.searchlist=data
-       //  this.showout=(this.searchvalue0.length+this.searchvalue1.length+this.searchvalue2.length+this.searchvalue3.length+this.searchvalue4.length)
-        
-       // }
-       
    }
 }
 </script>

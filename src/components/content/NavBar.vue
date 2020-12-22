@@ -170,7 +170,7 @@ export default {
           },
           {
             text: "新闻",
-            path: "/new"
+            path: "/comment"
           },
           {
             text: "应用",
@@ -237,12 +237,16 @@ export default {
               message: "登陆成功",
               type: "success"
             })
+
             this.$store.commit("updateSession", data)
-            // this.$cookie.set("sessionid", this.$store.getters.getSession, {expires:1})
-            // console.log("this.$cookie =")
-            // console.log(this.$cookie)
-            // console.log("cookie=")
-            // console.log(document.cookie)
+            let user = {
+              "userName": this.account,
+              "password": this.password
+            }
+            this.$store.commit("updateUser", user)
+            console.log("用户名" + this.$store.getters.getUserName)
+            console.log(this.$store.getters.getPassword)
+
             this.centerDialogVisible = false
             this.logined = true
           } else {

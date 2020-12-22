@@ -1,14 +1,10 @@
 <template>
   <div id="comment">
-    <h1>论坛</h1>
-    <welcomeinfo v-show="!changeshow"></welcomeinfo>
+    <welcomeinfo ></welcomeinfo>
 	
     <el-tabs tab-position=left >
     <el-tab-pane label="个人信息" >
     	<personinfo ></personinfo>
-    </el-tab-pane>
-    <el-tab-pane label="修改信息" >
-    	<changeinfo ></changeinfo>
     </el-tab-pane>
     <el-tab-pane label="消息通知">
     	<noticeinfo></noticeinfo>
@@ -24,32 +20,26 @@
 </template>
 
 <script>
-	import Personinfo from "./childCops/PersonInfo"
-	import Changeinfo from "./childCops/ChangeInfo"
-	import Noticeinfo from "./childCops/NoticeInfo"
-	import Browseinfo from "./childCops/BrowseInfo"
-	import Welcomeinfo from "./childCops/WelcomeInfo"
-	import Welchangeinfo from "./childCops/WelchangeInfo"
-  import Collectinfo from "./childCops/CollectInfo"
+import Personinfo from "./childCops/PersonInfo"
+import Noticeinfo from "./childCops/NoticeInfo"
+import Browseinfo from "./childCops/BrowseInfo"
+import Welcomeinfo from "./childCops/WelcomeInfo"
+import Welchangeinfo from "./childCops/WelchangeInfo"
+import Collectinfo from "./childCops/CollectInfo"
 export default {
-
-  name: 'News',
-
-	components:{
-	    Personinfo,
-	    Changeinfo,
-	    Noticeinfo,
-	    Browseinfo,
-	    Welcomeinfo,
-	    Welchangeinfo,
-      Collectinfo
-	    
-  },
-  data () {
-    return {
-      changeshow:false
+    name: 'News',
+  	components:{
+  	    Personinfo,
+  	    Noticeinfo,
+  	    Browseinfo,
+  	    Welcomeinfo,
+  	    Welchangeinfo,
+        Collectinfo
+    },
+    data () {
+      return {
+      }
     }
-  }
 }
 </script>
 
@@ -58,6 +48,7 @@ export default {
 #comment{
 	width: 80%;
 	margin-left: 10%;
+  min-width: 1260px;
 }
 #comment >>>.el-tabs__header.is-left{
 

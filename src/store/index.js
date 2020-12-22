@@ -10,6 +10,8 @@ Vue.use(Vuex)
 const state = {
   cartList: [],
   session: "",
+  userName: "",
+  password: "",
 }
 
 const store = new Vuex.Store({

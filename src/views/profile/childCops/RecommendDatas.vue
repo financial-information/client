@@ -1,73 +1,55 @@
 <template>
   <div id="Recommenddata">
       <div class="company_information_recommend">
-      <el-row v-for="(n, index) in (recommendData.length/2)" :key="index" :gutter="80" style="margin-bottom: 20px;">
-          <el-col :span="12" v-for="(j, index) in 2" :key="index">
-            <div class="profileCards" id="profileCards" >
-            <div style="margin-bottom: 15px;">
-              <el-container style="width:100%;height: 95px;">
-               <el-aside style="width: 30%"><img :src= "recommendData[(n-1)*2+j-1].url" style="width: 100%;height: 90%; background-size: cover;"></el-aside> 
-                <el-main style="width: 55%;">
-                  <el-row style="font-size: 27px;height: 27px;margin-bottom:5px;">{{recommendData[(n-1)*2+j-1].stock_name}}</el-row>
-                  <el-row style="font-size: 15px;height: 18px;
-                color: #9A9A9A;">{{recommendData[(n-1)*2+j-1].industry_type}}</el-row>
-                </el-main>
-              </el-container>
-              <el-container width="100%" style="padding: 0px;margin: 0px;">
-                <el-main style="width: 100%;height:60px;padding:0px;font-size:15px;color: #9A9A9A;word-break: break-all;text-overflow: ellipsis; overflow: hidden;display: -webkit-box;
-                    -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
-                  {{recommendData[(n-1)*2+j-1].profile}}
-                  </el-main>
-              </el-container><div style="float: right;">
-                            <el-button style="margin-top: 5px;" @click="goProDetailed(recommendData[(n-1)*2+j-1].stock_code,recommendData[(n-1)*2+j-1].company_name)">查看详情</el-button>
-                        </div>
-            </div>
-            
-              </div>
-          </el-col>
-        </el-row>
+          <el-row v-for="(n, index) in (recommendData.length/2)" :key="index" :gutter="80" style="margin-bottom: 20px;">
+              <el-col :span="12" v-for="(j, index) in 2" :key="index">
+                  <div class="profileCards" id="profileCards" >
+                      <div style="margin-bottom: 15px;">
+                          <el-container style="width:100%;height: 95px;">
+                              <el-aside style="width: 30%"><img :src= "recommendData[(n-1)*2+j-1].url" style="width: 100%;height: 90%; background-size: cover;"></el-aside> 
+                              <el-main style="width: 55%;">
+                                  <el-row style="font-size: 27px;height: 27px;margin-bottom:5px;">{{recommendData[(n-1)*2+j-1].stock_name}}</el-row>
+                                  <el-row style="font-size: 15px;height: 18px;
+                                color: #9A9A9A;">{{recommendData[(n-1)*2+j-1].industry_type}}</el-row>
+                              </el-main>
+                          </el-container>
+                          <el-container width="100%" style="padding: 0px;margin: 0px;">
+                              <el-main style="width: 100%;height:60px;padding:0px;font-size:15px;color: #9A9A9A;word-break: break-all;text-overflow: ellipsis; overflow: hidden;display: -webkit-box;
+                                  -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
+                                {{recommendData[(n-1)*2+j-1].profile}}
+                                </el-main>
+                          </el-container>
+                          <div style="float: right;">
+                              <el-button style="margin-top: 5px;" @click="goProDetailed(recommendData[(n-1)*2+j-1].stock_code,recommendData[(n-1)*2+j-1].company_name,recommendData[(n-1)*2+j-1].id)">查看详情</el-button>
+                          </div>
+                      </div>
+                  </div>
+              </el-col>
+          </el-row>
       </div>
-      
-    
-    <!-- 分页 -->
-    <div class="page">
-      <div class="page_title">
-          <el-pagination
-          background
-          layout="prev, pager, next"
-          :total="totalItem"
-          @current-change="handleCurrentChange">
-        </el-pagination>
-        <br>
-      </div>
-      
 
-      <div class="page_button">第
-        <el-input class="go_page" size="mini" v-model="tempPage" maxlength="3"></el-input>
-        页
-        <el-button type="primary" size="mini" @click="directTo()">前往</el-button>
+     <div class="page" >
+            <el-pagination
+              @current-change="handleCurrentChange"
+              :current-page="currentpage"
+              layout="total,prev, pager, next, jumper"
+              :total="totalItem">
+            </el-pagination>
       </div>
-      
-    </div>
-     
-  
-
-  </div>
+</div>
 </template>
 
 <script>
-import {getCompanyBasicDataByPage} from "@/network/tyy"
+import {getCompanyBasicDataByPage,addHistoryCompanyBasicData} from "@/network/tyy"
 export default {
-
   name: 'Recommenddatas',
-
   data () {
     return {
       recommendData:[],
       totalItem: 0,
       // 输入框中的页面
       tempPage: new Number,
-      currentPage: 1
+      currentpage: 1
     }
   },
   mounted() {
@@ -86,16 +68,15 @@ export default {
       getCompanyBasicDataByPage(data).then(res => {
         if(res.results == null || res.results == undefined) {
              console.log('kkk')
-           } else {
+        } else {
             console.log(res)
-for(let i = 0; i < res.results.length; i++) {
-          res.results[i].url = require('@/assets/img/home/search_background.png')
-        }
-        this.recommendData = res.results
-        // console.log(Math.ceil(res.count / 10))
-        this.totalItem = res.count
-           } 
-        
+            for(let i = 0; i < res.results.length; i++) {
+                  res.results[i].url = require('@/assets/img/home/search_background.png')
+            }
+            this.recommendData = res.results
+            // console.log(Math.ceil(res.count / 10))
+            this.totalItem = res.count
+               } 
       })
     },
     // 通过页数进行数据获取
@@ -117,18 +98,20 @@ for(let i = 0; i < res.results.length; i++) {
     handleCurrentChange(val) {
       this.getDataFromPage(val)
     },
-
-    /*
-      click 触发事件
-    */
-    directTo() {
-      this.currentPage = parseInt(this.tempPage)
-      this.getDataFromPage(this.currentPage)
-    },
-       goProDetailed(data1,data2){
-            console.log(data1)
-             this.$router.push({path:"/stock",query:{ code: data1, name: data2}})
-       }
+    goProDetailed(data1,data2,data3){
+        let data={
+          'user_phone': "19975372577",
+          'history_id': data3,
+          'history_type':1
+        }
+        console.log(data)
+        addHistoryCompanyBasicData(data).then(res=>{
+            if(res!=null&&res != undefined)
+               console.log('成功过')
+         })
+        console.log(data1)
+        this.$router.push({path:"/stock",query:{ code: data1, name: data2}})
+    }
   }
 }
 </script>
@@ -164,23 +147,10 @@ for(let i = 0; i < res.results.length; i++) {
   width: 50%;
   margin:auto;
 }
-/*直接输入跳转页面*/
-.go_page {
-  width: 50px;
-}
-/*增加*/
 .add {
   text-align: right;
 }
-/*页面其他按钮*/
-.page_button {
-  text-align:center;
-}
-.page_title {
-  text-align: center;
-}
-/*模态框*/
-  .profile_cards{
+.profile_cards{
   width: 80%;
   margin-left: 10%;
   margin-right: 10%;

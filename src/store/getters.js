@@ -5,7 +5,12 @@ const getters = {
   cartCount(state, getters) {
     return getters.cartList.length
   },
-
+  getUserName(state) {
+  	return state.userName
+  },
+  getPassword(state) {
+  	return state.password
+  },
 
 
   getSession(state) {
