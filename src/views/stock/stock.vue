@@ -192,11 +192,11 @@
                         <el-table :data="ProfitabilityTableData" border>
                           
                             <el-table-column label="指标名称"prop="name"></el-table-column>
-                            <el-table-column label="2016" prop=data[0]> </el-table-column>
-                            <el-table-column label="2017" prop="data[1]"> </el-table-column>
-                            <el-table-column  label="2018" prop="data[2]"> </el-table-column>
-                            <el-table-column label="2019"  prop="data[3]">  </el-table-column>
-                            <el-table-column label="2020" prop="data[4]"> </el-table-column>
+                            <el-table-column label="2015" prop=data[0]> </el-table-column>
+                            <el-table-column label="2016" prop="data[1]"> </el-table-column>
+                            <el-table-column  label="2017" prop="data[2]"> </el-table-column>
+                            <el-table-column label="2018"  prop="data[3]">  </el-table-column>
+                            <el-table-column label="2019" prop="data[4]"> </el-table-column>
                            
                         </el-table>   		
                      	</div>
@@ -209,11 +209,11 @@
                         <el-table :data="SolwencyTableData" border>
                           
                             <el-table-column label="指标名称"prop="name"></el-table-column>
-                            <el-table-column label="2016" prop=data[0]> </el-table-column>
-                            <el-table-column label="2017" prop="data[1]"> </el-table-column>
-                            <el-table-column  label="2018" prop="data[2]"> </el-table-column>
-                            <el-table-column label="2019"  prop="data[3]">  </el-table-column>
-                            <el-table-column label="2020" prop="data[4]"> </el-table-column>
+                            <el-table-column label="2015" prop=data[1]> </el-table-column>
+                            <el-table-column label="2016" prop="data[2]"> </el-table-column>
+                            <el-table-column  label="2017" prop="data[3]"> </el-table-column>
+                            <el-table-column label="2018"  prop="data[4]">  </el-table-column>
+                            <el-table-column label="2019" prop="data[5]"> </el-table-column>
                            
                         </el-table>        		
                      	</div>
@@ -221,22 +221,40 @@
                      		运营能力图表    		
                      	</div>
                      	<div id="detalied131"  v-if="this.detailed===13 &&this.todatas===true">
-                     		运营能力数据    		
+                     		运营能力数据  
+                        <el-table :data="OperateTableData" border>
+                          
+                            <el-table-column label="指标名称"prop="name"></el-table-column>
+                            <el-table-column label="2015" prop=data[1]> </el-table-column>
+                            <el-table-column label="2016" prop="data[2]"> </el-table-column>
+                            <el-table-column  label="2017" prop="data[3]"> </el-table-column>
+                            <el-table-column label="2018"  prop="data[4]">  </el-table-column>
+                            <el-table-column label="2019" prop="data[5]"> </el-table-column>
+                           
+                        </el-table>       		
                      	</div>
                      	<div id="detalied140"  v-if="this.detailed===14 &&this.todatas===false">
                      		发展能力图表    		
                      	</div>
                      	<div id="detalied141"  v-if="this.detailed===14 &&this.todatas===true">
-                     		发展能力数据    		
+                     		发展能力数据  
+                        <el-table :data="DevelopTableData" border>
+                          
+                            <el-table-column label="指标名称"prop="name"></el-table-column>
+                            <el-table-column label="2015" prop=data[0]> </el-table-column>
+                            <el-table-column label="2016" prop="data[1]"> </el-table-column>
+                            <el-table-column  label="2017" prop="data[2]"> </el-table-column>
+                            <el-table-column label="2018"  prop="data[3]">  </el-table-column>
+                            <el-table-column label="2019" prop="data[4]"> </el-table-column>
+                           
+                        </el-table>       		
                      	</div>
                          	
                </div>
 					  </el-main>
 					</el-container>
   		</div>
-</div>
-   <footers></footers>
-  </div>
+</div>  </div>
 </template>
 
 <script>
@@ -265,6 +283,8 @@ export default {
     	selectType: 'day',
       ProfitabilityTableData: [{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]}],
       SolwencyTableData: [{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]}],
+      OperateTableData:[{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]}],
+      DevelopTableData:[{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]}],
       show1:false,
       show2:false
         }
@@ -303,6 +323,7 @@ export default {
              else  
              {
             this.info = res.results[0]
+            console.log(this.info )
             // 盈利能力
               this.ProfitabilityTableData[0].name="净资产收益率（%）"
               this.ProfitabilityTableData[0].data=this.info.roe.split(';')
@@ -310,13 +331,39 @@ export default {
               this.ProfitabilityTableData[1].data=this.info.roa.split(';')
               this.ProfitabilityTableData[2].name="销售净利率(%)"
               this.ProfitabilityTableData[2].data=this.info.sale_net_profit.split(';')
-            // 流动比率
-              this.SolwencyTableData[0].name="流动比率（%）"
-              this.SolwencyTableData[0].data=this.info.current_ratio.split(';')
-              this.SolwencyTableData[1].name="速动比率(%)"
-              this.SolwencyTableData[1].data=this.info.quick_ratio.split(';')
+            // 偿还能力
+              this.SolwencyTableData[0].name="现金比率（%）"
+              this.SolwencyTableData[0].data=this.info.cash_ratio.split(';')
+              this.SolwencyTableData[1].name="现金流量比率(%)"
+              this.SolwencyTableData[1].data=this.info.cash_flow.split(';')
               this.SolwencyTableData[2].name="资产负债率(%)"
               this.SolwencyTableData[2].data=this.info.asset_liability_ratio.split(';')
+            // 运营能力
+              this.OperateTableData[0].name="存货周转天数"
+              this.OperateTableData[0].data=this.info.inventory_turnover_days.split(';')
+              this.OperateTableData[1].name="流动资产周转天数"
+              this.OperateTableData[1].data=this.info.current_assets_turnover_days.split(';')
+              this.OperateTableData[2].name="应收账款周转天数"
+              this.OperateTableData[2].data=this.info.sales_outstanding_turnover_days.split(';')
+            // 发展能力
+              this.DevelopTableData[0].name="股东权益增长率（%）"
+              let aa=[]
+              aa=this.info.shareholders_equity_ratio.split(';')
+              for(let i=0;i<=4;i++)
+                aa[i]=(aa[i+1]-aa[i]).toFixed(4)
+              this.DevelopTableData[0].data=aa
+              this.DevelopTableData[1].name="资产增长率（%）"
+              let bb=[]
+              bb=this.info.total_assets.split(';')
+              for(let i=0;i<=4;i++)
+                bb[i]=(bb[i+1]-bb[i]).toFixed(4)
+              this.DevelopTableData[1].data=bb
+              this.DevelopTableData[2].name="营业利润增长率（%）"
+              let cc=[]
+              cc=this.info.operating_profit_total.split(';')
+              for(let i=0;i<=4;i++)
+                cc[i]=((cc[i+1]-cc[i])*100/cc[i]).toFixed(4)
+              this.DevelopTableData[2].data=cc
             }
           
         })
