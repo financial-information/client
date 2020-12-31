@@ -72,6 +72,7 @@ export default{
         objecttop:[],
         f_flag: 0,
         doc: null,
+        imgList:[]
 			}
 		},
     mounted(){
@@ -100,7 +101,7 @@ export default{
           getCompanyId(id).then(re=>{
                    
                //   console.log(re.results[0])
-                  re.results[0].url = require('@/assets/img/home/search_background.png')
+                  re.results[0].url = this.imgList[(re.results[0].id)%60]
                    this.objecttop.push(JSON.parse(JSON.stringify(re.results[0])))
                   this.f_flag++
                   //取10个
@@ -114,6 +115,10 @@ export default{
                 })
         },
         getHotCompanyData(){
+          for(let i=0;i<60;i++)
+          { 
+            this.imgList.push(require('@/assets/img/profilephoto/'+i+'.jpg'))
+          }
           let data={
             'module_type': '1',
             'size': '10'
@@ -212,7 +217,6 @@ export default{
 .profileCards:hover {
     border-color:#FFB700;
     border-style: solid;
-    background-color: #F2F5FE;
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.31);
 }
 .profile_cards_body /deep/ .el-button{

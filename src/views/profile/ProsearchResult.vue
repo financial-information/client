@@ -285,7 +285,25 @@
                    value4:'',
             }
             ],
-        currentpage:1
+        currentpage:1,
+        imgList:[
+      // {
+      //   url:require('@/assets/img/home/查.jpg')
+
+      // },
+      // {
+      //   url:require('@/assets/img/home/糖油粑粑.jpg')
+
+      // },
+      // {
+      //   url:require('@/assets/img/home/豆腐的.jpg')
+
+      // },
+      // {
+      //   url:require('@/assets/img/home/龙虾.jpg')
+
+      // }
+      ]
 
     }
   },
@@ -302,6 +320,9 @@
   },
   methods:{
        searchCompanyData(page) {
+        for(let i=0;i<60;i++)
+         { 
+          this.imgList.push(require('@/assets/img/profilephoto/'+i+'.jpg'))}
            let data={
               "name":this.value0,
               "type": this.value1,
@@ -336,7 +357,7 @@
                 if(page==1)
                      this.$message.success("搜索成功")
               for(let i = 0; i < res.results.length; i++) {
-                res.results[i].url = require('@/assets/img/home/查.jpg')
+                res.results[i].url = this.imgList[(res.results[i].id)%60]
               }
              // console.log(res.results)
               this.objectresult = res.results
@@ -370,6 +391,9 @@
        },
        back(){
         this.$router.push({path:"/profile"})
+       },
+       random(min,max){
+        return Math.floor(Math.random()*(max-min))+min
        }
    }
 }

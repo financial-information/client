@@ -17,7 +17,7 @@ export function getCompanyMinute(data) {
 export function searchCompanyData(data) {
 	console.log('url: :/company_database/company_basic_data/?company_name='+data.name+'&industry_type='+data.type)
     return request({
-    	url: '/company_database/company_basic_data/?company_name='+data.name+'&industry_type='+data.type+
+    	url: '/company_database/company_basic_data/?search='+data.name+'&industry_type='+data.type+
         '&min_price='+data.min_price+'&max_price='+data.max_price+'&min_time='+data.min_time+'&max_time='+data.max_time+'&offset='+data.offset,
     })
 }

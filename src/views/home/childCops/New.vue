@@ -21,13 +21,10 @@
       <el-row style="padding: 5px;border-bottom: 1px solid gray;"><div><a href="https://finance.sina.com.cn/stock/stockptd/2020-11-15/doc-iiznezxs2008284.shtml"  style="text-decoration: none;color: black;">下周如何布局？109家公司获机构密集调研</a></div> </el-row>
       <el-row style="padding: 5px;border-bottom: 1px solid gray;"><div><a href="https://finance.sina.com.cn/stock/hkstock/ggscyd/2020-11-13/doc-iiznezxs1715580.shtml"  style="text-decoration: none;color: black;">腾讯前9月“隐藏”账面浮盈4000亿？</a> </div></el-row>
       <el-row style="padding: 5px;"><div><a href="https://finance.sina.com.cn/china/2020-11-15/doc-iiznctke1532699.shtml"  style="text-decoration: none;color: black;">财政部：中日首次达成双边关税减让安排 实现历史性突破</a></div> </el-row>
-
-
   </el-main>
 </el-container>
    </div>
 </template>
-
 <script>
 export default {
 

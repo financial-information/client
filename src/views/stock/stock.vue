@@ -16,7 +16,7 @@
   			<div class="stock_box_main" >
   				<el-container>
               <el-aside width="210px">
-                <img src="~@/assets/img/common/logo.png" style="width: 210px;">
+                <img :src= " companyinfo.url" style="width: 210px;height: 200px; background-size: cover;">
               </el-aside>
               <el-container>
                   <el-header >
@@ -58,20 +58,20 @@
                                 <div>股票代码：{{info.stock_code}}</div>
                             </el-col>
                             <el-col :span="12">
-                                 <div>A股总资本：{{info.total_share_capital}}</div>
+                                 <div>总资本：{{info.total_share_capital}}</div>
                             </el-col>
                         </el-row>
                         <el-row id="stock_info_total_21">
                            	 <el-col :span="12">
-                                 <div>A股简称：{{info.stock_name}}    </div>
+                                 <div>股票简称：{{info.stock_name}}    </div>
                              </el-col>
                              <el-col :span="12">
-                                  <div>A股流通资本：{{info.total_share_capital}}</div>
+                                  <div>流通资本：{{info.total_share_capital}}</div>
                              </el-col>
                         </el-row>
                         <el-row id="stock_info_total_22">
                            	 <el-col :span="19">
-                                 <div>A股上市日期：{{companyinfo.found_date}}</div>
+                                 <div>股票类型：{{showtype(companyinfo.stock_type)}}</div>
                              </el-col>
                              <el-col :span="5" >
                                 <div style="font-size: 15px;color: #484CBF;position: absolute;bottom: 0;">查看更多详情<i class="el-icon-arrow-right"></i></div>
@@ -146,57 +146,67 @@
     					  	<el-row style="border-bottom: 1px solid #E4E4E4;">
     					  	<span style="font-size: 35px;color: #737373;opacity: 1;">关键信息</span>
     					  </el-row>
-    					  	<el-collapse v-model="activeNames" @change="handleChange">
+    					  	<el-collapse v-model="activeNames" @change="handleChange" accordion>
     							  <el-collapse-item title="财务分析" name="1" class="collapseItem1">
     							    <div @click="detailed = 11" v-bind:class="[errorClass ,detailed===11 ? activeClass : '']">盈利能力</div>
     							    <div @click="detailed = 12" v-bind:class="[errorClass ,detailed===12 ? activeClass : '']">偿还能力</div>
     							    <div @click="detailed = 13" v-bind:class="[errorClass ,detailed===13 ? activeClass : '']">运营能力</div>
     							    <div @click="detailed = 14" v-bind:class="[errorClass ,detailed===14 ? activeClass : '']">发展能力</div>
     							  </el-collapse-item>
-    							  <el-collapse-item title="风险分析" name="2" class="collapseItem2">
-    							    <div @click="detailed = 21" v-bind:class="[errorClass ,detailed===21 ? activeClass : '']">控制反馈</div>
-    							    <div @click="detailed = 22" v-bind:class="[errorClass ,detailed===21 ? activeClass : '']">页面反馈</div>
+    							  <el-collapse-item title="风险分析" name="2" class="collapseItem2" @click="detailed = 14" >
+    							   
     							  </el-collapse-item>
     							  <el-collapse-item title="企业价值" name="3" class="collapseItem3">
-    							    <div @click="detailed = 31" v-bind:class="[errorClass ,detailed===31 ? activeClass : '']">简化流程</div>
-    							    <div @click="detailed = 32" v-bind:class="[errorClass ,detailed===32 ? activeClass : '']">清晰明确</div>
-    							    <div @click="detailed = 33" v-bind:class="[errorClass ,detailed===33 ? activeClass : '']">帮助用户识别</div>
+                      <div style="margin-left: 20px;">
+                        企业价值由各方面因素综合计算所得
+                      </div>
     							  </el-collapse-item>
     							  <el-collapse-item title="发展前景" name="4" class="collapseItem4">
-    							    <div @click="detailed = 41" v-bind:class="[errorClass ,detailed===41 ? activeClass : '']">用户决策</div>
-    							    <div @click="detailed = 42" v-bind:class="[errorClass ,detailed===42 ? activeClass : '']">结果可控</div>
+    							    <div style="margin-left: 20px;">我们将通过一些预测值来反映公司的发展前景</div>
     							  </el-collapse-item>
     							</el-collapse>
     					  </el-aside>
 					  <el-main class="stock_found_data">
-                <el-row><div style="float: right;margin-right: 20px;margin-top: 10px;">
-                <el-button plain icon="el-icon-star-off" v-if="!show2" @click="addCollectionData(companyinfo.id,2)">点击收藏</el-button>
-                    <el-button v-if="show2" style="background-color:#494DC2; " plain icon="el-icon-star-off" disabled>已收藏</el-button></div></el-row>
-    					  <el-row v-if=" todatas === false" style="border-bottom: 1px solid #E4E4E4;">
-    					  		<el-col :span="20"><div><span style="font-size: 35px;color: #737373;opacity: 1;">详细图表</span></div></el-col> 
-                    <el-col  :span="4" ><div class="grid-content bg-purple-light" style="font-size: 15px;color: #484CBF;position: absolute;bottom: 0;" @click="todatas = true"><span>查看详细数据<i class="el-icon-arrow-right"></i></span></div></el-col>	
+                <el-row>
+                    <div style="float: right;margin-right: 20px;margin-top: 10px;">
+                        <el-button plain icon="el-icon-star-off" v-if="!show2" @click="addCollectionData(companyinfo.id,2)">点击收藏</el-button>
+                        <el-button v-if="show2" style="background-color:#494DC2; " plain icon="el-icon-star-off" disabled>已收藏</el-button>
+                    </div>
                 </el-row>
-                <el-row v-if=" todatas === true" style="border-bottom: 1px solid #E4E4E4;">
+    					  <el-row v-if=" todatas === false &&this.showname==1" style="border-bottom: 1px solid #E4E4E4;">
+    					  		<el-col :span="20"><div><span style="font-size: 35px;color: #737373;opacity: 1;">详细图表</span></div></el-col> 
+                    <el-col  :span="4" >
+                        <div class="grid-content bg-purple-light" style="font-size: 15px;color: #484CBF;position: absolute;bottom: 0;" @click="todatas = true"><span>查看详细数据<i class="el-icon-arrow-right"></i></span></div>
+                    </el-col>	
+                </el-row>
+                <el-row v-if=" todatas === true &&this.showname==1" style="border-bottom: 1px solid #E4E4E4;">
             	  		<el-col :span="20"><div><span style="font-size: 35px;color: #737373;opacity: 1;">详细数据</span></div></el-col>
                     <el-col :span="4" ><div class="grid-content bg-purple-light" style="font-size: 15px;color: #484CBF;position: absolute;bottom: 0;" @click="todatas = false"><span>查看详细图表<i class="el-icon-arrow-right"></i></span></div></el-col>		
                 </el-row>
-                 <div id="detaild_data_echarts" style="">
+                <el-row v-if=" this.showname==2||this.showname==3||this.showname==4" style="border-bottom: 1px solid #E4E4E4;">
+                    <el-col :span="20" v-if="this.showname==2"><div><span style="font-size: 35px;color: #737373;opacity: 1;">风险分析</span></div></el-col>
+                    <el-col :span="20" v-if="this.showname==3"><div><span style="font-size: 35px;color: #737373;opacity: 1;">企业价值</span></div></el-col>
+                    <el-col :span="20" v-if="this.showname==4"><div><span style="font-size: 35px;color: #737373;opacity: 1;">发展前景</span></div></el-col>
+                </el-row>
+
+                <div id="detaild_data_echarts" style="">
                      	<div id="detalied0"  v-if="this.detailed===0">
                      		<img src="~@/assets/img/home/nodata.png" style="height: 100%;">
                      	</div>
-                     	<div id="detalied110"  v-if="this.detailed===11 &&this.todatas===false">
-                     		盈利能力图表    		
+                     	<div id="detalied110"  v-show="this.detailed===11 &&this.todatas===false" style="width: 500px;">{{ProfitabilityTableData[0].data.slice(1, 6).map(Number) }} 
+                        <div id="mychart10" ref="mychart10" v-show="this.detailed===11 &&this.todatas===false" style="width: 500px;height: 500px;">sss</div>
+                     		盈利能力图表  		
                      	</div>
                      	<div id="detalied111"  v-if="this.detailed===11 &&this.todatas===true">
                      		盈利能力数据 
                         <el-table :data="ProfitabilityTableData" border>
                           
                             <el-table-column label="指标名称"prop="name"></el-table-column>
-                            <el-table-column label="2015" prop=data[0]> </el-table-column>
-                            <el-table-column label="2016" prop="data[1]"> </el-table-column>
-                            <el-table-column  label="2017" prop="data[2]"> </el-table-column>
-                            <el-table-column label="2018"  prop="data[3]">  </el-table-column>
-                            <el-table-column label="2019" prop="data[4]"> </el-table-column>
+                            <el-table-column label="2015" prop=data[1]> </el-table-column>
+                            <el-table-column label="2016" prop="data[2]"> </el-table-column>
+                            <el-table-column  label="2017" prop="data[3]"> </el-table-column>
+                            <el-table-column label="2018"  prop="data[4]">  </el-table-column>
+                            <el-table-column label="2019" prop="data[5]"> </el-table-column>
                            
                         </el-table>   		
                      	</div>
@@ -217,7 +227,7 @@
                            
                         </el-table>        		
                      	</div>
-                     	<div id="detalied130"  v-if="this.detailed===13 &&this.todatas===false">
+                     	<div id="detalied130"  v-show="this.detailed===13 &&this.todatas===false">
                      		运营能力图表    		
                      	</div>
                      	<div id="detalied131"  v-if="this.detailed===13 &&this.todatas===true">
@@ -249,6 +259,34 @@
                            
                         </el-table>       		
                      	</div>
+                      <div id="detalied2"  v-if="this.detailed==2">
+                        风险分析 
+                        <el-table :data="RiskTableData" border>
+                          
+                            <el-table-column label="指标名称"prop="name"></el-table-column>
+                            <el-table-column label="数值" prop=data> </el-table-column>
+                           
+                        </el-table>           
+                      </div>
+                      <div id="detalied3"  v-if="this.detailed==3">
+                        企业价值
+                        <el-table :data="EnterpriseTableData" border>
+                          
+                            <el-table-column label="指标名称"prop="name"></el-table-column>
+                            <el-table-column label="数值（单位：元）" prop=data> 
+                            </el-table-column>
+                           
+                        </el-table>           
+                      </div>
+                      <!-- this.detailed==4 -->
+                      <div id="detalied4"  v-show="this.detailed==4" style="">
+                        <!-- <div id="mychart4" ref="mychart4" v-show="this.detailed==4"></div> -->
+                        <el-table v-if="this.detailed==4":data="DevelopForestTableData" border>
+                            <el-table-column label="指标名称"prop="name"></el-table-column>
+                            <el-table-column label="数值（单位：元）" prop=data> 
+                            </el-table-column>
+                        </el-table>           
+                      </div>
                          	
                </div>
 					  </el-main>
@@ -261,10 +299,19 @@
 import Footers from "@/components/content/Footer"
 import { searchCompanyFinanceData,addCollectData } from "@/network/tyy"
 import { searchCompanyOneData,isCollected} from "@/network/tyy"
+import echarts from 'echarts'
 export default {
   name: 'Stock',
   components:{
           Footers,
+  },
+  mounted() {
+    this.code=this.$route.query.code
+    this.names=this.$route.query.name
+    this.getCompanyFinanceData()
+    this.searchCompanyData()
+   // this.draw()
+    this.draw10()
   },
   data () {
     return {
@@ -285,22 +332,57 @@ export default {
       SolwencyTableData: [{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]}],
       OperateTableData:[{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]}],
       DevelopTableData:[{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]}],
+      DevelopForestTableData: [{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]},{name:'',data:[]}],
+      EnterpriseTableData: [{name:'',data:[]}],
+      RiskTableData:[{name:'',data:[]},{name:'',data:[]},{name:'',data:[]}],
       show1:false,
-      show2:false
-        }
+      show2:false,
+      showname: 0 ,
+      detailed4:false,
+      chartsData4:[0,0,0,0,0,0,0],
+      imgList:[],
+      type:["全部A股 ","上证A股 ","深证A股 ","中小企业板 ","创业板 ","科创板 ","深证主板A股 ","全部B股 ","上证B股 ","深证B股 ","全部AB股","上证AB股 ","深证AB股 "]
+      }
   },
   created(){
     
   },
-  mounted() {
-    this.code=this.$route.query.code
-    this.names=this.$route.query.name
-    this.getCompanyFinanceData()
-    this.searchCompanyData()
-    
-  },
+
   methods:{
+  //     draw(){
+  //       console.log(this.detailed)
+  //         console.log('sygunba')
+  //         // 基于准备好的dom，初始化echarts实例
+  //       let myChart = this.$echarts.init(document.getElementById("mychart4"))
+  //       // 绘制图表
+  //       let option={
+  //         title: { text: '深圳指数' },
+  //           tooltip: {},
+  //           xAxis: {
+  //               data: ["每股收益","每股净利润","主营业务收入","息税前利润","每股现金流","利润总额","营业利润"]
+  //           },
+  //           yAxis: {
+  //           },
+  //           series: [{
+  //               name: '销量',
+  //               type: 'bar',
+  //               data: this.chartsData4.slice(0, 6)
+  //           }]
+  //       }
+  //       myChart.setOption(option)
+  //     return myChart
+        
+  // }
+  //   ,
   	  handleChange(val) {
+        console.log("gun")
+        if(val==1||val==0)
+          this.detailed=0
+        console.log(val)
+        this.showname=val
+        if(val==2||val==3||val==4){
+          this.detailed=val
+        }
       },
       handleClick(tab, event) {
       },
@@ -316,14 +398,12 @@ export default {
       },
       getCompanyFinanceData(){
           let data = this.code
-          console.log(data)
           searchCompanyFinanceData(data).then(res => {
              if(res.results == null || res.results == undefined) {
              } 
              else  
              {
             this.info = res.results[0]
-            console.log(this.info )
             // 盈利能力
               this.ProfitabilityTableData[0].name="净资产收益率（%）"
               this.ProfitabilityTableData[0].data=this.info.roe.split(';')
@@ -331,6 +411,7 @@ export default {
               this.ProfitabilityTableData[1].data=this.info.roa.split(';')
               this.ProfitabilityTableData[2].name="销售净利率(%)"
               this.ProfitabilityTableData[2].data=this.info.sale_net_profit.split(';')
+              //console.log(this.ProfitabilityTableData[2].data.slice(1, 6).map(Number))
             // 偿还能力
               this.SolwencyTableData[0].name="现金比率（%）"
               this.SolwencyTableData[0].data=this.info.cash_ratio.split(';')
@@ -364,22 +445,56 @@ export default {
               for(let i=0;i<=4;i++)
                 cc[i]=((cc[i+1]-cc[i])*100/cc[i]).toFixed(4)
               this.DevelopTableData[2].data=cc
+               // 发展前景
+              this.DevelopForestTableData[0].name="预测每股收益（未来12个月）"
+              this.DevelopForestTableData[0].data=this.info.forecast_earnings
+              this.DevelopForestTableData[1].name="预测净利润（未来12个月）"
+              this.DevelopForestTableData[1].data=this.info.forecast_net_profit
+              this.DevelopForestTableData[2].name="预测主营业务收入（未来12个月）"
+              this.DevelopForestTableData[2].data=this.info.forecast_main_business_income
+              this.DevelopForestTableData[3].name="预测息税前利润（未来12个月）"
+              this.DevelopForestTableData[3].data=this.info.forecast_earnings_before_tax
+              this.DevelopForestTableData[4].name="预测每股现金流（未来12个月）"
+              this.DevelopForestTableData[4].data=this.info.forecast_cash_flow
+              this.DevelopForestTableData[5].name="预测利润总额（未来12个月））"
+              this.DevelopForestTableData[5].data=this.info.forecast_total_profit
+              this.DevelopForestTableData[6].name="预测营业利润（未来12个月）"
+              this.DevelopForestTableData[6].data=this.info.forecast_operating_profit
+              this.chartsData4[0]=parseFloat(this.info.forecast_earnings)
+              this.chartsData4[1]=parseFloat(this.info.forecast_net_profit)
+              this.chartsData4[2]=parseFloat(this.info.forecast_main_business_income)
+              this.chartsData4[3]=parseFloat(this.info.forecast_earnings_before_tax)
+              this.chartsData4[4]=parseFloat(this.info.forecast_cash_flow)
+              this.chartsData4[5]=parseFloat(this.info.forecast_total_profit)
+              this.chartsData4[6]=parseFloat(this.info.forecast_operating_profit)
+              this.chartsData4=this.chartsData4.slice(0, 6)
+               // 企业价值
+              this.EnterpriseTableData[0].name="企业价值（剔除货币资金）"
+              this.EnterpriseTableData[0].data=this.info.enterprise_value
+              // 风险分析
+              this.RiskTableData[0].name="BETA值(24周)"
+              this.RiskTableData[0].data=this.info.beta
+               this.RiskTableData[1].name="年化收益率（24周，单位：%）"
+              this.RiskTableData[1].data=this.info.annualized_rate_return
+               this.RiskTableData[2].name="年化波动率(24周，单位：%）"
+              this.RiskTableData[2].data=this.info.annualized_volatility
+
             }
-          
         })
       },
       searchCompanyData() {
+         for(let i=0;i<60;i++)
+         { 
+          this.imgList.push(require('@/assets/img/profilephoto/'+i+'.jpg'))}
           let data=this.names
           searchCompanyOneData(data).then(res => {
             if(res.results == null || res.results == undefined) {
 
             } else  {
             for(let i = 0; i < res.results.length; i++) {
-              res.results[i].url = require('@/assets/img/home/豆腐的.jpg')
+              res.results[i].url = this.imgList[(res.results[i].id)%60]
             }
             this.companyinfo = res.results[0]
-            console.log(res.results[0].id)
-            console.log('成功啦')
             this.isCollection(res.results[0].id,2)
             this.isCollection(res.results[0].id,3)
             }
@@ -392,7 +507,6 @@ export default {
             'collection_module_type': data2,
             'deleted': '0'
           }
-          console.log(data)
           isCollected(data).then(res=>{
                if(res.count>0){
                   if(data2==2)
@@ -431,7 +545,57 @@ export default {
               //        console.log('成功啦')
           })
 
-      }
+      },
+      showtype(data){
+        let str=""
+        for(let i=0;i<13;i++){
+          if(data[i]==1&&i!=0&&i!=7&&i!=10)
+            str+=this.type[i]
+        }
+        return str
+      },
+      draw10() {
+
+      // 获取随机数据
+      // this.getRandomData()
+      let mycharts = this.$echarts.init(document.getElementById("mychart10"))
+      let a1= this.ProfitabilityTableData[0].data.slice(1, 6).map(Number)
+
+      let option = {
+          xAxis: {
+              boundaryGap: false,
+              data: ['2015年', '2016年', '2017年', '2018年', '2019年',]
+          },
+          yAxis: {
+              min:0,
+              max:100,
+              show: true
+          },
+          series: [
+              {
+                  name: '净资产收益率',
+                  type: 'line',
+                  data: a1
+              },
+              {
+                  name: '总资产净利率ROA',
+                  type: 'line',
+                  data: this.ProfitabilityTableData[1].data.slice(1, 6).map(Number)
+              },
+              {
+                  name: '销售净利率',
+                  type: 'line',
+                  data: this.ProfitabilityTableData[2].data.slice(1, 6).map(Number)
+
+              }
+          ]
+      };
+      console.log(option)
+      mycharts.setOption(option)
+      console.log(this.ProfitabilityTableData[0].data.slice(1,6))
+      return mycharts
+    }
+
     }
 }
 </script>
@@ -653,5 +817,9 @@ line-height: 41px;
 color: #E4696D;
 opacity: 1;
 border-bottom: 2px solid #E4696D;
+}
+#mychart4 {
+  width: 800px;
+  height: 500px;
 }
 </style>

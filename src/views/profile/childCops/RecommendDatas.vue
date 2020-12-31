@@ -49,7 +49,8 @@ export default {
       totalItem: 0,
       // 输入框中的页面
       tempPage: new Number,
-      currentpage: 1
+      currentpage: 1,
+      imgList:[]
     }
   },
   mounted() {
@@ -61,22 +62,25 @@ export default {
     */
     // 初始化数据获取
     getCompanyBasicDataList() {
+      for(let i=0;i<60;i++)
+      { 
+        this.imgList.push(require('@/assets/img/profilephoto/'+i+'.jpg'))
+      }
       let data = {
         "page": 1
       }
-      //console.log('111')
       getCompanyBasicDataByPage(data).then(res => {
         if(res.results == null || res.results == undefined) {
-             //console.log('kkk')
-        } else {
-           // console.log(res)
+        } 
+        else 
+        {
             for(let i = 0; i < res.results.length; i++) {
-                  res.results[i].url = require('@/assets/img/home/search_background.png')
+                  res.results[i].url = this.imgList[(res.results[i].id)%60]
             }
             this.recommendData = res.results
             // console.log(Math.ceil(res.count / 10))
             this.totalItem = res.count
-               } 
+        } 
       })
     },
     // 通过页数进行数据获取
@@ -86,7 +90,7 @@ export default {
       }
       getCompanyBasicDataByPage(data).then(res => {
         for(let i = 0; i < res.results.length; i++) {
-          res.results[i].url = require('@/assets/img/home/search_background.png')
+          res.results[i].url = this.imgList[(res.results[i].id)%60]
         }
         this.recommendData = res.results
       })
@@ -108,7 +112,7 @@ export default {
             //if(res!=null&&res != undefined)
               // console.log('成功过')
          })
-        console.log(data1)
+        //console.log(data1)
         this.$router.push({path:"/stock",query:{ code: data1, name: data2}})
     }
   }
@@ -118,7 +122,6 @@ export default {
 <style lang="css" scoped>
 .Recommenddata{
   background-color: yellow;
-  
 }
 .company_information_recommend{
   margin-right: 75px;
@@ -127,9 +130,6 @@ export default {
 .header {
   text-align: right;
   font-size: 12px;
-}
-.form_item {
-  /*text-align: center;*/
 }
 .col_title {
   font-weight: bolder;
@@ -154,16 +154,12 @@ export default {
   margin-left: 10%;
   margin-right: 10%;
   background: white;
-  
-
 }
 .profile_cards_head{
   margin-right: 75px;
   margin-left: 75px;
   margin-bottom: 20px;
   border-bottom: 1px solid #F8F8F8;
-
-
 }
 .profile_cards_head .bg-purple{
     font-size: 45px;
@@ -186,54 +182,43 @@ export default {
   align-items: bottom;
   bottom: 0;
 }
-
 .profile_cards_body{
   margin-right: 75px;
   margin-left: 75px;
 }
 .profileCards{
     height: 215px;
-background: #FFFFFF;
-padding-left: 30px;
-padding-top: 22px;
-padding-right: 15px;
-border-width:2px  2px 2px 8px;
-border-color:#494DC2;
-border-style: solid;
-border-radius: 10px;
-
+    background: #FFFFFF;
+    padding-left: 30px;
+    padding-top: 22px;
+    padding-right: 15px;
+    border-width:2px  2px 2px 8px;
+    border-color:#494DC2;
+    border-style: solid;
+    border-radius: 10px;
 /*box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.27)*/
 }
 .profileCards:hover {
   /*border-width:2px  2px 2px 8px;
-border-color:#FFB700;
-border-style: solid;background-color: #494DC2;
+    border-color:#FFB700;
+    border-style: solid;background-color: #494DC2;
     border-radius: 0px 10px 10px 0px;
-  color: #FFFFFF;*/
-  border-width:2px  2px 2px 8px;
-border-color:#FFB700;
-border-style: solid;
+    color: #FFFFFF;*/
+    border-width:2px  2px 2px 8px;
+    border-color:#FFB700;
+    border-style: solid;
     border-radius: 10px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.31);
 }
 .profileCards /deep/ .el-button{
-  /*border-width:2px  2px 2px 8px;
-border-color:#FFB700;
-border-style: solid;background-color: #494DC2;
-    border-radius: 0px 10px 10px 0px;
-  color: #FFFFFF;*/
   width: 95px;
-height: 42px;
-color:white;
+  height: 42px;
+  color:white;
 background: #494DC2;
 border-radius: 8px;
  
 }
 .profileCards /deep/ .el-button:hover{
-  /*border-width:2px  2px 2px 8px;
-border-color:#FFB700;
-border-style: solid;background-color: #494DC2;
-    border-radius: 0px 10px 10px 0px;
-  color: #FFFFFF;*/
   background-color: #FFB700;
 }
 </style>

@@ -62,6 +62,7 @@ export default{
     	  objectmain:[],
         f_flag: 0,
         doc: null,
+        imgList:[]
 			}
 		},
     mounted(){
@@ -77,7 +78,7 @@ export default{
             else 
             {
                 for(let i = 0; i < res.results.length; i++) {
-                  res.results[i].url = require('@/assets/img/home/search_background.png')
+                  res.results[i].url = this.imgList[(re.results[i].id)%60]
                 }
                 this.objecttop = res.results
             }
@@ -85,8 +86,7 @@ export default{
       },
       getCompanyId(id) {
           getCompanyId(id).then(re=>{
-                   console.log(re)
-                  re.results[0].url = require('@/assets/img/home/search_background.png')
+                  re.results[0].url = this.imgList[(re.results[0].id)%60]
                    this.objecttop.push(JSON.parse(JSON.stringify(re.results[0])))
                   this.f_flag++
                   //取10个
@@ -100,6 +100,10 @@ export default{
                 })
       },
       getHotCompanyData(){
+        for(let i=0;i<60;i++)
+          { 
+            this.imgList.push(require('@/assets/img/profilephoto/'+i+'.jpg'))
+          }
         let data={
           'module_type': '1',
           'size': '10'
@@ -124,8 +128,7 @@ export default{
           }
           // console.log(data)
            addHistoryCompanyBasicData(data).then(res=>{
-              if(res!=null&&res != undefined)
-                 console.log("chengg")
+              if(res!=null&&res != undefined){}
            })
           this.$router.push({path:"/stock",query:{ code: data1, name: data2}})
       },
@@ -201,8 +204,8 @@ export default{
 } 
 .profileCards:hover {
     border-color:#FFB700;
-    border-style: solid;
-    background-color: #F2F5FE;
+    border-style: solid;/*
+    background-color: #F2F5FE;*/
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.31);
 }
 .profile_cards_body /deep/ .el-button{
